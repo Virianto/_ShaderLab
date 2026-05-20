@@ -16,70 +16,70 @@
 
 ---
 
-## 🌌 Un laboratorio visual con estética sci‑fi y alma técnica
+## 🌌 A visual lab with sci-fi aesthetics and technical depth
 
-**_ShaderLab_** es un repositorio orientado a la creación y compilación de **shaders para Unity**, con una identidad visual marcada, una presentación cuidada y una base real para experimentar con **ShaderLab** y **HLSL**.
+**_ShaderLab_** is a repository focused on building and compiling **shaders for Unity**, with a strong visual identity, a polished presentation, and a solid foundation for experimenting with **ShaderLab** and **HLSL**.
 
-Aquí no se trata solo de guardar shaders.
-Se trata de construir un espacio que transmita, desde el primer vistazo, ideas como:
+This is not just about storing shaders.
+It is about building a space that communicates, at first glance, ideas like:
 
-- **energía**,
-- **neón**,
-- **distorsión**,
-- **superficies imposibles**,
-- y **efectos que parecen salidos de una interfaz del futuro**.
+- **energy**,
+- **neon**,
+- **distortion**,
+- **impossible surfaces**,
+- and **effects that feel like they came from a futuristic interface**.
 
-> **Objetivo:** que el repositorio se vea tan potente como los shaders que contiene.
-
----
-
-## ✨ Qué transmite este repositorio
-
-- **Estética visual potente** desde la portada del README.
-- **Base técnica real** apoyada en Unity, ShaderLab y HLSL.
-- **Espacio de experimentación** para materiales, iluminación y efectos estilizados.
-- **Presentación minimalista pero impactante**, pensada para lucir bien directamente en GitHub.
+> **Goal:** make the repository look as powerful as the shaders it contains.
 
 ---
 
-## 🧬 Stack del proyecto
+## ✨ What this repository conveys
+
+- **Strong visual aesthetics** from the README cover onward.
+- **A real technical foundation** built on Unity, ShaderLab, and HLSL.
+- **An experimentation space** for materials, lighting, and stylized effects.
+- **A minimal but striking presentation**, designed to look great directly on GitHub.
+
+---
+
+## 🧬 Project stack
 
 <table>
   <tr>
-    <td><b>Motor</b></td>
+    <td><b>Engine</b></td>
     <td><b>Unity</b></td>
   </tr>
   <tr>
-    <td><b>Lenguaje principal</b></td>
+    <td><b>Main language</b></td>
     <td><b>ShaderLab</b></td>
   </tr>
   <tr>
-    <td><b>Lenguaje complementario</b></td>
+    <td><b>Supporting language</b></td>
     <td><b>HLSL</b></td>
   </tr>
   <tr>
-    <td><b>Propósito</b></td>
-    <td><b>Investigación visual, materiales y efectos gráficos</b></td>
+    <td><b>Purpose</b></td>
+    <td><b>Visual research, materials, and graphical effects</b></td>
   </tr>
 </table>
 
 ---
 
-## 🎥 Preview del shader principal
+## 🎥 Main shader preview
 
-> **Placeholder preparado para tu GIF real.** Sustituye `assets/preview-shader.gif` por la ruta del archivo que quieras subir al repositorio.
+> **Placeholder ready for your real GIF.** Replace `assets/preview-shader.gif` with the path to the file you want to upload to the repository.
 
 <div align="center">
-  <img src="assets/preview-shader.gif" alt="Preview del shader principal — reemplazar por GIF real" width="900" />
+  <img src="assets/preview-shader.gif" alt="Main shader preview — replace with a real GIF" width="900" />
 </div>
 
 <p align="center">
-  <sub>🔁 Reemplaza este placeholder por un GIF exportado directamente desde Unity para que el README muestre tu trabajo real.</sub>
+  <sub>🔁 Replace this placeholder with a GIF exported directly from Unity so the README showcases your real work.</sub>
 </p>
 
 ---
 
-## 🖼️ Showcase visual
+## 🖼️ Visual showcase
 
 <div align="center">
   <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80" width="49%" alt="Neon visual inspiration" />
@@ -87,25 +87,25 @@ Se trata de construir un espacio que transmita, desde el primer vistazo, ideas c
 </div>
 
 <p align="center">
-  <sub>Una referencia estética para la dirección visual del laboratorio: brillos, emisión, glitches, energía y superficies estilizadas.</sub>
+  <sub>An aesthetic reference for the lab’s visual direction: glow, emission, glitches, energy, and stylized surfaces.</sub>
 </p>
 
 ---
 
-## 🚀 Qué tipo de shaders puedes esperar aquí
+## 🚀 What kind of shaders you can expect here
 
-- **Glow / emission shaders** con presencia visual fuerte.
-- **Distortion / glitch shaders** con estética futurista.
-- **Dissolve shaders** para transiciones energéticas.
-- **Fresnel / edge effects** para siluetas con carácter.
-- **Stylized / toon materials** con personalidad propia.
-- **Experimentos visuales** orientados a prototipos impactantes.
+- **Glow / emission shaders** with strong visual presence.
+- **Distortion / glitch shaders** with a futuristic aesthetic.
+- **Dissolve shaders** for energetic transitions.
+- **Fresnel / edge effects** for silhouettes with character.
+- **Stylized / toon materials** with a distinct personality.
+- **Visual experiments** aimed at striking prototypes.
 
 ---
 
-## 📁 Estructura real del repositorio
+## 📁 Real repository structure
 
-Según la estructura actual del proyecto, el repositorio contiene:
+According to the current project structure, the repository contains:
 
 ```text
 _ShaderLab/
@@ -119,71 +119,71 @@ _ShaderLab/
 └── README.md
 ```
 
-### 🔍 Lectura rápida de la estructura
+### 🔍 Quick structure overview
 
-- **Assets/** → núcleo visual del proyecto en Unity; aquí deberían vivir shaders, materiales, escenas, texturas y demos.
-- **Packages/** → dependencias y configuración del ecosistema del proyecto.
-- **ProjectSettings/** → parámetros del proyecto Unity.
-- **.vscode/** → configuración del entorno de edición.
-- **_ShaderLab.slnx** → solución asociada al proyecto.
+- **Assets/** → the project’s visual core in Unity; this is where shaders, materials, scenes, textures, and demos should live.
+- **Packages/** → project dependencies and ecosystem configuration.
+- **ProjectSettings/** → Unity project settings.
+- **.vscode/** → editor environment configuration.
+- **_ShaderLab.slnx** → solution file associated with the project.
 
-> Si quieres, en una siguiente iteración puedo dejar también documentada una **subestructura recomendada dentro de `Assets/`** para que el repositorio quede todavía más profesional.
-
----
-
-## 🛠️ Cómo usar este repositorio
-
-1. **Clona** el proyecto.
-2. **Ábrelo con Unity**.
-3. Explora el contenido dentro de **`Assets/`**.
-4. Ejecuta escenas de prueba o crea materiales que usen los shaders del repositorio.
-5. Sustituye el GIF placeholder del README por una captura real de tus efectos.
+> If you want, in a future iteration I can also document a **recommended substructure inside `Assets/`** to make the repository feel even more professional.
 
 ---
 
-## 🧠 Filosofía del proyecto
+## 🛠️ How to use this repository
 
-En _ShaderLab_, un shader no es únicamente una pieza técnica.
-También es una **declaración visual**.
-
-Por eso este repositorio quiere combinar dos ideas al mismo tiempo:
-
-- **orden y claridad** para que el proyecto sea navegable,
-- **impacto estético** para que la presentación tenga personalidad propia.
-
-> **Si un shader merece existir, también merece ser mostrado con estilo.**
+1. **Clone** the project.
+2. **Open it in Unity**.
+3. Explore the contents inside **`Assets/`**.
+4. Run test scenes or create materials that use the repository’s shaders.
+5. Replace the README GIF placeholder with a real capture of your effects.
 
 ---
 
-## 📌 Próximos pasos recomendados
+## 🧠 Project philosophy
 
-Para que esta v2 quede todavía mejor, te recomiendo añadir en el futuro:
+In _ShaderLab_, a shader is not just a technical asset.
+It is also a **visual statement**.
 
-- GIFs reales exportados desde Unity.
-- Capturas comparativas de varios shaders.
-- Una galería con thumbnails por efecto.
-- Secciones técnicas por shader:
-  - propiedades,
-  - parámetros,
-  - compatibilidad,
+That is why this repository aims to combine two ideas at the same time:
+
+- **order and clarity** so the project is easy to navigate,
+- **aesthetic impact** so the presentation has its own personality.
+
+> **If a shader deserves to exist, it also deserves to be presented with style.**
+
+---
+
+## 📌 Recommended next steps
+
+To make this v2 even better, I recommend adding in the future:
+
+- Real GIFs exported from Unity.
+- Comparison captures of multiple shaders.
+- A gallery with thumbnails for each effect.
+- Technical sections for each shader:
+  - properties,
+  - parameters,
+  - compatibility,
   - screenshots,
-  - notas de uso.
-- Compatibilidad con pipelines si aplica:
+  - usage notes.
+- Pipeline compatibility if applicable:
   - Built-in,
   - URP,
   - HDRP.
 
 ---
 
-## ⭐ Cierre
+## ⭐ Closing
 
-Si has construido este laboratorio visual para explorar gráficos en Unity,
-este README ya puede funcionar como una **portada con identidad**, pero lo realmente brutal llegará cuando insertes tus propios previews reales.
+If you built this visual lab to explore graphics in Unity,
+this README can already work as a **cover page with identity**, but the truly impressive version will arrive when you insert your own real previews.
 
 <div align="center">
-  <b>Shaders que no solo renderizan.</b>
+  <b>Shaders that do more than render.</b>
   <br />
-  <b>Shaders que entran por los ojos.</b>
+  <b>Shaders that make an impression at first glance.</b>
 </div>
 
 <br />
