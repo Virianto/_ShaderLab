@@ -1,8 +1,6 @@
-# ⚡ _ShaderLab_
-
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&height=220&color=0:6A00FF,35:00C2FF,70:00F5A0,100:111111&text=_ShaderLab&fontSize=64&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Unity%20Shaders%20%7C%20ShaderLab%20%7C%20HLSL&descAlignY=60" alt="_ShaderLab banner" />
+<img src="https://capsule-render.vercel.app/api?type=waving&height=220&color=0:6A00FF,35:00C2FF,70:00F5A0,100:111111&text=Unity ShaderLab&fontSize=64&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Unity%20Shaders%20%7C%20HLSL&descAlignY=60" alt="_ShaderLab banner" />
 
 <br />
 <br />
