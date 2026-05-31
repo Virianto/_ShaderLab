@@ -1,20 +1,14 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&height=220&color=0:6A00FF,35:00C2FF,70:00F5A0,100:111111&text=Unity ShaderLab&fontSize=64&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Unity%20Shaders%20%7C%20HLSL&descAlignY=60" alt="_ShaderLab banner" />
-
-<br />
-<br />
+<img src="https://capsule-render.vercel.app/api?type=waving&height=200&color=0:111111,33:FF0099,67:FF9900,100:111111&text=Unity%20ShaderLab&fontSize=64&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Unity%20Shaders%20%7C%20HLSL&descAlignY=60" alt="Unity ShaderLab" />
 
 <img alt="Unity" src="https://img.shields.io/badge/Unity-Visual%20Shaders-111111?style=for-the-badge&logo=unity&logoColor=white">
-<img alt="ShaderLab" src="https://img.shields.io/badge/ShaderLab-Core-7C4DFF?style=for-the-badge">
-<img alt="HLSL" src="https://img.shields.io/badge/HLSL-Low%20Level-00C2FF?style=for-the-badge">
-<img alt="Status" src="https://img.shields.io/badge/Status-Visual%20Lab-00F5A0?style=for-the-badge&logoColor=black">
 
 </div>
 
 ---
 
-## 🌌 A visual lab with sci-fi aesthetics and technical depth
+## 🌌 Compilation of Unity shaders for any purpose
 
 **_ShaderLab_** is a repository focused on building and compiling **shaders for Unity**, with a strong visual identity, a polished presentation, and a solid foundation for experimenting with **ShaderLab** and **HLSL**.
 
@@ -22,9 +16,6 @@ This is not just about storing shaders.
 It is about building a space that communicates, at first glance, ideas like:
 
 - **energy**,
-- **neon**,
-- **distortion**,
-- **impossible surfaces**,
 - and **effects that feel like they came from a futuristic interface**.
 
 > **Goal:** make the repository look as powerful as the shaders it contains.
@@ -157,17 +148,12 @@ That is why this repository aims to combine two ideas at the same time:
 
 To make this v2 even better, I recommend adding in the future:
 
-- Real GIFs exported from Unity.
 - Comparison captures of multiple shaders.
 - A gallery with thumbnails for each effect.
 - Technical sections for each shader:
   - properties,
-  - parameters,
-  - compatibility,
-  - screenshots,
-  - usage notes.
+  - parameters
 - Pipeline compatibility if applicable:
-  - Built-in,
   - URP,
   - HDRP.
 
@@ -187,5 +173,5 @@ this README can already work as a **cover page with identity**, but the truly im
 <br />
 
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&section=footer&height=160&color=0:111111,30:6A00FF,70:00C2FF,100:00F5A0" alt="footer" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&section=footer&height=120&color=0:111111,33:FF0099,67:FF9900,100:111111" alt="footer" />
 </div>
