@@ -173,5 +173,5 @@ this README can already work as a **cover page with identity**, but the truly im
 <br />
 
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&section=footer&height=100&color=0:111111,33:FF9900,67:FF0099,100:111111&text=Virianto%20Tem&fontSize=43&fontColor=000000&animation=fadeIn&fontAlignY=27" alt="footer" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&section=footer&height=100&color=0:111111,33:FF0099,67:FF9900,100:111111&text=Virianto%20Tem&fontSize=43&fontColor=000000&animation=fadeIn&fontAlignY=27" alt="footer" />
 </div>
