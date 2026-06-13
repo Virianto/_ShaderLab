@@ -54,30 +54,19 @@ It is about building a space that communicates, at first glance, ideas like:
 
 ---
 
-## 🎥 Main shader preview
+## 🎥 Showcase
 
-> **Placeholder ready for your real GIF.** Replace `assets/preview-shader.gif` with the path to the file you want to upload to the repository.
-
-<div align="center">
-  <img src="assets/preview-shader.gif" alt="Main shader preview — replace with a real GIF" width="900" />
-</div>
-
-<p align="center">
-  <sub>🔁 Replace this placeholder with a GIF exported directly from Unity so the README showcases your real work.</sub>
-</p>
-
----
-
-## 🖼️ Visual showcase
+> **Animated color blending** (Works on both 3D and UI elements)
 
 <div align="center">
-  <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80" width="49%" alt="Neon visual inspiration" />
-  <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80" width="49%" alt="Digital sci-fi inspiration" />
+  <img src="GIFs/FramedAnimBlendColors_2.gif" alt="Framed Animated Blended Colors GIF" width="360" />
 </div>
 
-<p align="center">
-  <sub>An aesthetic reference for the lab’s visual direction: glow, emission, glitches, energy, and stylized surfaces.</sub>
-</p>
+> **Animated color and texture blending**
+
+<div align="center">
+  <img src="GIFs/AnimTexHighlightColor_1.gif" alt="Animated Texture Highlighting Color GIF" width="360" />
+</div>
 
 ---
 
