@@ -34,17 +34,6 @@
 
 ---
 
-## 🚀 What kind of shaders you can expect here
-
-- **Glow / emission shaders** with strong visual presence.
-- **Distortion / glitch shaders** with a futuristic aesthetic.
-- **Dissolve shaders** for energetic transitions.
-- **Fresnel / edge effects** for silhouettes with character.
-- **Stylized / toon materials** with a distinct personality.
-- **Visual experiments** aimed at striking prototypes.
-
----
-
 ## 📌 License
 
 <div align="center">
