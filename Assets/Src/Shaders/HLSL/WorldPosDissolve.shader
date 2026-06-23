@@ -1,4 +1,4 @@
-Shader "Custom/HLSL/WorldPosDissolve"
+Shader "_ViriantoTem/HLSL/WorldPosDissolve"
 {
     Properties
     {
@@ -61,7 +61,7 @@ Shader "Custom/HLSL/WorldPosDissolve"
             {
                 half2 uv : TEXCOORD0;                
                 half4 vertex : SV_POSITION;
-                half3 worldPos : TEXCOORD1; // Sirve para obtener la posición en el mundo
+                half3 worldPos : TEXCOORD1; // Sirve para obtener la posiciï¿½n en el mundo
             };
 
 

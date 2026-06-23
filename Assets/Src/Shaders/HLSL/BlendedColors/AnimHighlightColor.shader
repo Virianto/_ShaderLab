@@ -1,4 +1,4 @@
-Shader "Custom/HLSL/BlendedColors/AnimHighlightColor"
+Shader "_ViriantoTem/HLSL/BlendedColors/AnimHighlightColor"
 {
     Properties
     {
@@ -72,7 +72,7 @@ Shader "Custom/HLSL/BlendedColors/AnimHighlightColor"
 				return o;
 			}
 
-			fixed4 frag(v2f i) : COLOR
+			fixed4 frag(v2f i) : SV_Target
 			{
 				fixed4 finalColorRGBA = _BgColor;
 

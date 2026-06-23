@@ -1,4 +1,4 @@
-﻿Shader "Custom/HLSL/BilinearAnimBlendColors"
+﻿Shader "_ViriantoTem/HLSL/BilinearAnimBlendColors"
 {
 	// C ---- D
 	// |      |
@@ -59,7 +59,7 @@
 				return o;
 			}
 
-			fixed4 frag(v2f i) : COLOR
+			fixed4 frag(v2f i) : SV_Target
 			{
 				fixed4 finalColorRGBA;
 

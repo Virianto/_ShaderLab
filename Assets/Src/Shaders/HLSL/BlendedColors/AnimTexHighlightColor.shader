@@ -1,4 +1,4 @@
-Shader "Custom/HLSL/BlendedColors/AnimTexHighlightColor"
+Shader "_ViriantoTem/HLSL/BlendedColors/AnimTexHighlightColor"
 {
     Properties
     {
@@ -80,7 +80,7 @@ Shader "Custom/HLSL/BlendedColors/AnimTexHighlightColor"
 				return o;
 			}
 
-			fixed4 frag(v2f i) : COLOR
+			fixed4 frag(v2f i) : SV_Target
 			{
 				fixed4 finalColorRGBA = tex2D(_MainTex, i.uv) * _MainColor;
 
@@ -88,8 +88,7 @@ Shader "Custom/HLSL/BlendedColors/AnimTexHighlightColor"
 
 				// This goes slowly back to 0 every time _Time is multiple for _TimeBetweenStripes and keeps growing
 				fixed limit = fmod(_Time[0] * _Speed, sqrt(_TimeBetweenStripes));
-
-
+				
 				// Here we paint a striped area relative to limit
 				if (moveDir < limit + _HighlightWidth && moveDir > limit - _HighlightWidth)
 				{
