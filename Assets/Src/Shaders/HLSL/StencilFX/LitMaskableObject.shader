@@ -1,4 +1,4 @@
-Shader "Custom/HLSL/StencilFX/LitMaskableObject"
+Shader "_ViriantoTem/HLSL/StencilFX/LitMaskableObject"
 {
     Properties
     {
@@ -85,7 +85,7 @@ Shader "Custom/HLSL/StencilFX/LitMaskableObject"
                 return o;
             }
             
-            half4 frag(v2f i) : COLOR 
+            half4 frag(v2f i) : SV_Target 
             {
                 half4 result = tex2D(_MainTex, i.uv) * _Color;
                                 

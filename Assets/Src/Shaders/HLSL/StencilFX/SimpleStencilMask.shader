@@ -1,4 +1,4 @@
-﻿Shader "Custom/HLSL/StencilFX/SimpleStencilMask"
+﻿Shader "_ViriantoTem/HLSL/StencilFX/SimpleStencilMask"
 {
     Properties 
     {
@@ -23,7 +23,7 @@
         // This turns off any coloring being written to the frame buffer
         ColorMask 0
 
-        // Always place Stencil options between Tags and CGPROGRAM block
+        // Always place Stencil options between Tags and HLSLPROGRAM block
         Stencil
         {
             Ref[_StencilRef]	// ID of this shader in Stencil buffer (several shaders can have the same for comparisons)
