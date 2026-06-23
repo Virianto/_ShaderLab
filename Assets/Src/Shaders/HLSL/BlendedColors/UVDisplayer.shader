@@ -1,4 +1,4 @@
-﻿Shader "Custom/HLSL/UVDisplayer"
+﻿Shader "_ViriantoTem/HLSL/UVDisplayer"
 {
 	// Paints the object following the UV coordinates, this way we can
 	// know how textures will fit on its surface.
@@ -40,7 +40,7 @@
 			}
 			
 			// The returned value of this fragment function will be a half4 attribute related to the color hardware resource
-			fixed2 frag (v2f i) : COLOR
+			fixed2 frag (v2f i) : SV_Target
 			{
 				// CG function 'frac' returns the fractional portion of a scalar or each vector component
 				fixed2 c = frac(i.uv);									

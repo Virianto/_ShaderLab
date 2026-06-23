@@ -1,4 +1,4 @@
-Shader "Custom/HLSL/BlendedColors/AnimShapes"
+Shader "_ViriantoTem/HLSL/BlendedColors/AnimShapes"
 {
     Properties
     {
@@ -73,7 +73,7 @@ Shader "Custom/HLSL/BlendedColors/AnimShapes"
 				return o;
 			}
 
-			fixed4 frag(v2f inData) : COLOR
+			fixed4 frag(v2f inData) : SV_Target
 			{
 				fixed4 c;
 

@@ -1,4 +1,4 @@
-﻿Shader "Custom/HLSL/BlendedColors"
+﻿Shader "_ViriantoTem/HLSL/BlendedColors"
 {
 	// This pixel shader paints a gradient between the given colors along the X axis in UVs
 	// More documentation can be found in Udemy's course: https://indra.udemy.com/unity-shaders/learn/v4/t/lecture/8602852?start=0
@@ -55,7 +55,7 @@
 			}
 			
 			// The returned value of this fragment function will be a half4 attribute related to the color hardware resource
-			half4 frag (v2f i) : COLOR
+			half4 frag (v2f i) : SV_Target
 			{
 				float direction = _Horizontal ? i.uv.x : i.uv.y;
 				half4 c = _FlipAxis ? lerp(_ColorB, _ColorA, direction) : lerp(_ColorA, _ColorB, direction);

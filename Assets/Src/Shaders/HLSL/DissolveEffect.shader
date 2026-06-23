@@ -1,4 +1,4 @@
-Shader "Custom/HLSL/DissolveEffect"
+Shader "_ViriantoTem/HLSL/DissolveEffect"
 {
     Properties
     {
@@ -72,10 +72,9 @@ Shader "Custom/HLSL/DissolveEffect"
 
 			fixed4 frag(v2f i) : SV_Target
 			{
-				fixed4 dissolveValue;
 				fixed4 c;
 
-				dissolveValue = tex2D(_DissolveTex, i.uv);
+				fixed4 dissolveValue = tex2D(_DissolveTex, i.uv);
 
 				c = (_DissolveAmount + _DissolveLineWidth > dissolveValue.r) ? _DissolveLineColor : tex2D(_MainTex, i.uv) * _MainColor;
 
