@@ -11,61 +11,72 @@ Shader "_ViriantoTem/HLSL/CartoonFX/ToonLit"
 	{
 		Tags
 		{
-			"RenderType"="Opaque"			
+			"RenderType" = "Opaque"
+			"RenderPipeline" = "UniversalPipeline"
 		}
-		
-		LOD 200
 		
 		Pass
 		{
 			Name "FORWARD"
 			
-			HLSLPROGRAM
-		
-			#pragma surface surf ToonRamp
-
-			sampler2D _Ramp;
-
-			// custom lighting function that uses a texture ramp based
-			// on angle between light direction and normal
-			#pragma lighting ToonRamp exclude_path:prepass
-			
-			#include "HLSLSupport.cginc"            
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"  
-			
-			inline half4 LightingToonRamp (SurfaceOutput s, half3 lightDir, half atten)
+			Tags
 			{
-				#ifndef USING_DIRECTIONAL_LIGHT
-				lightDir = normalize(lightDir);
-				#endif
-				
-				half d = dot (s.Normal, lightDir)*0.5 + 0.5;
-				half3 ramp = tex2D (_Ramp, float2(d,d)).rgb;
-				
-				half4 c;
-				c.rgb = s.Albedo * _LightColor0.rgb * ramp * (atten * 2);
-				c.a = 0;
-				return c;
+				"LightMode" = "UniversalForward"				
 			}
 			
-			sampler2D _MainTex;
-			float4 _Color;
+			HLSLPROGRAM
+			
+			#pragma vertex vert
+			#pragma fragment frag
 
-			struct Input 
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+
+			struct Attributes
 			{
-				float2 uv_MainTex : TEXCOORD0;
+				float4 positionOS : POSITION;
+				float2 uv : TEXCOORD0;
+				float3 normalOS : NORMAL;
 			};
 
-			void surf (Input IN, inout SurfaceOutput o) 
+			struct Varyings
 			{
-				half4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
-				o.Albedo = c.rgb;
-				o.Alpha = c.a;
+				float4 positionCS : SV_POSITION;
+				float2 uv : TEXCOORD0;
+				float3 normalWS : TEXCOORD1;
+			};
+
+			CBUFFER_START(UnityPerMaterial)
+				half4 _Color;
+				float4 _MainTex_ST;
+			CBUFFER_END
+
+			TEXTURE2D(_MainTex); SAMPLER(sampler_MainTex);
+			TEXTURE2D(_Ramp); SAMPLER(sampler_Ramp);
+
+			Varyings vert (Attributes v)
+			{
+				Varyings o;
+				o.positionCS = TransformObjectToHClip(v.positionOS.xyz);
+				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+				o.normalWS = TransformObjectToWorldNormal(v.normalOS);
+				return o;
 			}
-			
+
+			half4 frag (Varyings i) : SV_Target
+			{
+				half4 texColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.uv) * _Color;
+				
+				Light light = GetMainLight();
+				
+				half d = dot(normalize(i.normalWS), light.direction) * 0.5 + 0.5;
+				half3 ramp = SAMPLE_TEXTURE2D(_Ramp, sampler_Ramp, float2(d, d)).rgb;
+				
+				half3 finalColor = texColor.rgb * light.color * ramp * (light.distanceAttenuation * light.shadowAttenuation);
+				return half4(finalColor, texColor.a);
+			}
 			ENDHLSL
-		}		
-	} 
+		}
+	}
 	Fallback "Diffuse"
 }
