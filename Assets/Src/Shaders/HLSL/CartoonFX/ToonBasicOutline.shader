@@ -1,4 +1,4 @@
-Shader "_ViriantoTem/HLSL/CartoonFX/BasicOutline"
+Shader "_ViriantoTem/HLSL/CartoonFX/ToonBasicOutline"
 {
 	Properties
 	{
@@ -10,57 +10,71 @@ Shader "_ViriantoTem/HLSL/CartoonFX/BasicOutline"
 	}
 	
 	HLSLPROGRAM
-	#include "UnityCG.cginc"
 	
-	struct appdata {
-		float4 vertex : POSITION;
-		float3 normal : NORMAL;
+	#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+	
+	struct appdata 
+	{
+		half4 vertex : POSITION;
+		half3 normal : NORMAL;
 	};
 
-	struct v2f {
-		float4 pos : SV_POSITION;
-		UNITY_FOG_COORDS(0)
-		fixed4 color : COLOR;
+	struct v2f 
+	{
+		half4 pos : SV_POSITION;
+		half4 color : COLOR;
 	};
 	
 	uniform float _Outline;
 	uniform float4 _OutlineColor;
 	
-	v2f vert(appdata v) {
+	v2f vert(appdata v) 
+	{
 		v2f o;
-		o.pos = UnityObjectToClipPos(v.vertex);
+		o.pos = TransformObjectToHClip(v.vertex.xyz);
 
-		float3 norm   = normalize(mul ((float3x3)UNITY_MATRIX_IT_MV, v.normal));
-		float2 offset = TransformViewToProjection(norm.xy);
+		float3 normalWS = TransformObjectToWorldNormal(v.normal);
+		float3 normalVS = TransformWorldToViewDir(normalWS);
+		float2 offset = mul((float2x2)UNITY_MATRIX_P, normalVS.xy);
 
-		#ifdef UNITY_Z_0_FAR_FROM_CLIPSPACE //to handle recent standard asset package on older version of unity (before 5.5)
-			o.pos.xy += offset * UNITY_Z_0_FAR_FROM_CLIPSPACE(o.pos.z) * _Outline;
-		#else
-			o.pos.xy += offset * o.pos.z * _Outline;
-		#endif
+		o.pos.xy += offset * o.pos.w * _Outline;
 		o.color = _OutlineColor;
-		UNITY_TRANSFER_FOG(o,o.pos);
 		return o;
 	}
+	
 	ENDHLSL
 
-	SubShader {
-		Tags { "RenderType"="Opaque" }
+	SubShader
+	{
+		Tags
+		{
+			"RenderType"="Opaque"
+			
+		}
+		
 		UsePass "Toon/Basic/BASE"
-		Pass {
+		
+		Pass
+		{
 			Name "OUTLINE"
-			Tags { "LightMode" = "Always" }
+			
+			Tags
+			{
+				"LightMode" = "Always"
+				
+			}
+			
 			Cull Front
 			ZWrite On
 			ColorMask RGB
 			Blend SrcAlpha OneMinusSrcAlpha
 
 			HLSLPROGRAM
+			
 			#pragma vertex vert
 			#pragma fragment frag
-			#pragma multi_compile_fog
 			
-			fixed4 frag(v2f i) : SV_Target
+			half4 frag(v2f i) : SV_Target
 			{
 				return i.color;
 			}
