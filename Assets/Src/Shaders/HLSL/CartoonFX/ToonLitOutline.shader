@@ -16,9 +16,9 @@ Shader "_ViriantoTem/HLSL/CartoonFX/ToonLitOutline"
 			"RenderType"="Opaque"			
 		}
 		
-		UsePass "Toon/Lit/FORWARD"
-		UsePass "Toon/Basic Outline/OUTLINE"
+		UsePass "ToonLit/FORWARD"
+		UsePass "ToonBasicOutline/OUTLINE"
 	} 
 	
-	Fallback "Toon/Lit"
+	Fallback "Diffuse"
 }

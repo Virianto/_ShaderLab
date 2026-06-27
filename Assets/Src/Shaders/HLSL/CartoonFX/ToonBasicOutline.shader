@@ -8,51 +8,15 @@ Shader "_ViriantoTem/HLSL/CartoonFX/ToonBasicOutline"
 		_MainTex ("Base (RGB)", 2D) = "white" { }
 		_ToonShade ("ToonShader Cubemap(RGB)", CUBE) = "" { }
 	}
-	
-	HLSLPROGRAM
-	
-	#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-	
-	struct appdata 
-	{
-		half4 vertex : POSITION;
-		half3 normal : NORMAL;
-	};
-
-	struct v2f 
-	{
-		half4 pos : SV_POSITION;
-		half4 color : COLOR;
-	};
-	
-	uniform float _Outline;
-	uniform float4 _OutlineColor;
-	
-	v2f vert(appdata v) 
-	{
-		v2f o;
-		o.pos = TransformObjectToHClip(v.vertex.xyz);
-
-		float3 normalWS = TransformObjectToWorldNormal(v.normal);
-		float3 normalVS = TransformWorldToViewDir(normalWS);
-		float2 offset = mul((float2x2)UNITY_MATRIX_P, normalVS.xy);
-
-		o.pos.xy += offset * o.pos.w * _Outline;
-		o.color = _OutlineColor;
-		return o;
-	}
-	
-	ENDHLSL
 
 	SubShader
 	{
 		Tags
 		{
-			"RenderType"="Opaque"
-			
+			"RenderType"="Opaque"			
 		}
 		
-		UsePass "Toon/Basic/BASE"
+		UsePass "ToonBasic/BASE"
 		
 		Pass
 		{
@@ -60,8 +24,7 @@ Shader "_ViriantoTem/HLSL/CartoonFX/ToonBasicOutline"
 			
 			Tags
 			{
-				"LightMode" = "Always"
-				
+				"LightMode" = "Always"				
 			}
 			
 			Cull Front
@@ -73,6 +36,37 @@ Shader "_ViriantoTem/HLSL/CartoonFX/ToonBasicOutline"
 			
 			#pragma vertex vert
 			#pragma fragment frag
+			
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+	
+			uniform float _Outline;
+			uniform float4 _OutlineColor;
+			
+			struct appdata 
+			{
+				half4 vertex : POSITION;
+				half3 normal : NORMAL;
+			};
+
+			struct v2f 
+			{
+				half4 pos : SV_POSITION;
+				half4 color : COLOR;
+			};
+	
+			v2f vert(appdata v) 
+			{
+				v2f o;
+				o.pos = TransformObjectToHClip(v.vertex.xyz);
+
+				float3 normalWS = TransformObjectToWorldNormal(v.normal);
+				float3 normalVS = TransformWorldToViewDir(normalWS);
+				float2 offset = mul((float2x2)UNITY_MATRIX_P, normalVS.xy);
+
+				o.pos.xy += offset * o.pos.w * _Outline;
+				o.color = _OutlineColor;
+				return o;
+			}
 			
 			half4 frag(v2f i) : SV_Target
 			{
