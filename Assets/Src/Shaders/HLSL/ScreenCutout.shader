@@ -24,8 +24,8 @@ Shader "_ViriantoTem/HLSL/ScreenCutout"
 		{
 			HLSLPROGRAM
 
-			#pragma vs vertexShader
-			#pragma ps pixelShader			
+			#pragma vertex vertexShader
+			#pragma fragment pixelShader			
 			
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 

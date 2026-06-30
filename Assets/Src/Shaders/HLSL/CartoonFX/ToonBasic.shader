@@ -21,10 +21,9 @@ Shader "_ViriantoTem/HLSL/CartoonFX/ToonBasic"
 			
 			HLSLPROGRAM
 			
-			#pragma vertex vert
-			#pragma fragment frag
+			#pragma vertex vertexShader
+			#pragma fragment pixelShader
 
-			#include "HLSLSupport.cginc"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
 			sampler2D _MainTex;
@@ -46,20 +45,20 @@ Shader "_ViriantoTem/HLSL/CartoonFX/ToonBasic"
 				half3 normal : TEXCOORD1;
 			};
 
-			v2f vert (appdata v)
+			v2f vertexShader (appdata v)
 			{
 				v2f o;
 				o.pos = TransformObjectToHClip(v.vertex);
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-				o.normal = normalize(mul((half3x3)unity_WorldToObject, v.normal));
+				o.normal = normalize(mul((min16float3x3)unity_WorldToObject, v.normal));
 				return o;
 			}
 
-			fixed4 frag (v2f i) : SV_Target
+			min16float4 pixelShader (v2f i) : SV_Target
 			{
-				fixed4 col = _Color * tex2D(_MainTex, i.uv);
-				fixed4 cube = texCUBE(_ToonShade, i.normal);
-				fixed4 c = fixed4(2.0f * cube.rgb * col.rgb, col.a);
+				min16float4 col = _Color * tex2D(_MainTex, i.uv);
+				min16float4 cube = texCUBE(_ToonShade, i.normal);
+				min16float4 c = min16float4(2.0f * cube.rgb * col.rgb, col.a);
 				return c;
 			}
 			ENDHLSL			
