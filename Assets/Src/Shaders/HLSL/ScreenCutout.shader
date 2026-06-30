@@ -26,18 +26,17 @@ Shader "_ViriantoTem/HLSL/ScreenCutout"
 			#pragma vertex vert
 			#pragma fragment frag
 			
-			#include "HLSLSupport.cginc"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
 			struct appdata
 			{
-				half4 vertex : POSITION;				
+				min16float4 vertex : POSITION;				
 			};
 
 			struct v2f
 			{		
-				half4 vertex : SV_POSITION;
-				fixed4 screenPos : TEXCOORD0;				
+				min16float4 vertex : SV_POSITION;
+				min16float4 screenPos : TEXCOORD0;				
 			};
 
 			v2f vert (appdata v)
@@ -50,10 +49,10 @@ Shader "_ViriantoTem/HLSL/ScreenCutout"
 			
 			sampler2D _MainTex;
 
-			fixed4 frag (v2f i) : SV_Target
+			min16float4 frag (v2f i) : SV_Target
 			{
 				i.screenPos /= i.screenPos.w;
-				fixed4 col = tex2D(_MainTex, float2(i.screenPos.x, i.screenPos.y));
+				min16float4 col = tex2D(_MainTex, min16float2(i.screenPos.x, i.screenPos.y));
 				
 				return col;
 			}
