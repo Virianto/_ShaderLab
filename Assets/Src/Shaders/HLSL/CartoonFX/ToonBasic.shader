@@ -26,38 +26,38 @@ Shader "_ViriantoTem/HLSL/CartoonFX/ToonBasic"
 
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-			// UNIFORMS: External parameters
-			// This macro declares _MainTex as a Texture2D object
-			Texture2D<min16float2> _MainTex;
-			min16float4 _MainTex_ST;
-			
-			samplerCUBE _ToonShade;			
-			min16float4 _Color;
-
-			struct appdata 
+			struct vertexInfo 
 			{
 				min16float4 vertex : POSITION;
 				min16float2 uv : TEXCOORD0;
 				min16float3 normal : NORMAL;
 			};
 			
-			struct v2f 
+			struct v2p 
 			{
 				min16float4 pos : SV_POSITION;
 				min16float2 uv : TEXCOORD0;
 				min16float3 normal : TEXCOORD1;
 			};
+			
+			// UNIFORMS: External parameters
+			
+			sampler2D _MainTex;
+			min16float4 _MainTex_ST;
+			
+			samplerCUBE _ToonShade;			
+			min16float4 _Color;
 
-			v2f vertexShader (appdata v)
+			v2p vertexShader (vertexInfo v)
 			{
-				v2f o;
+				v2p o;
 				o.pos = TransformObjectToHClip(v.vertex);
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				o.normal = normalize(mul((min16float3x3)unity_WorldToObject, v.normal));
 				return o;
 			}
 
-			min16float4 pixelShader (v2f i) : SV_Target
+			min16float4 pixelShader (v2p i) : SV_Target
 			{
 				min16float4 col = _Color * tex2D(_MainTex, i.uv);
 				min16float4 cube = texCUBE(_ToonShade, i.normal);

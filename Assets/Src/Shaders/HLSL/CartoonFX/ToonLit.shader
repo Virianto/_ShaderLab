@@ -46,14 +46,16 @@ Shader "_ViriantoTem/HLSL/CartoonFX/ToonLit"
 				min16float2 uv : TEXCOORD0;
 				min16float3 normalWS : TEXCOORD1;
 			};
-
+			
+			// UNIFORMS: External parameters
+			
+			TEXTURE2D(_MainTex); SAMPLER(sampler_MainTex);
+			TEXTURE2D(_Ramp); SAMPLER(sampler_Ramp);
+			
 			CBUFFER_START(UnityPerMaterial)
 				min16float4 _Color;
 				min16float4 _MainTex_ST;
 			CBUFFER_END
-
-			TEXTURE2D(_MainTex); SAMPLER(sampler_MainTex);
-			TEXTURE2D(_Ramp); SAMPLER(sampler_Ramp);
 
 			v2p vertexShader (vertexInfo v)
 			{
