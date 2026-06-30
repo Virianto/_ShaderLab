@@ -32,7 +32,7 @@ Shader "_ViriantoTem/HLSL/ScreenCutout"
 			// UNIFORMS: External parameters
 			// This macro declares _MainTex as a Texture2D object
 			Texture2D<min16float2> _MainTex;
-			min16float4 _MainTex_ST;
+			sampler2D _MainTex_ST;
 			
 			// Data structure: Before vertex shader (mesh info)
 			struct vertexInfo
@@ -60,7 +60,7 @@ Shader "_ViriantoTem/HLSL/ScreenCutout"
 			min16float4 pixelShader (v2p i) : SV_Target
 			{
 				i.screenPos /= i.screenPos.w;
-				min16float4 col = tex2D(_MainTex, min16float2(i.screenPos.x, i.screenPos.y));
+				min16float4 col = tex2D(_MainTex_ST, i.screenPos.xy);
 				
 				return col;
 			}
