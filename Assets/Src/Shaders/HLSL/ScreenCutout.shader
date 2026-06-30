@@ -2,7 +2,7 @@ Shader "_ViriantoTem/HLSL/ScreenCutout"
 {
 	Properties
 	{
-		_MainTex ("Texture", 2D) = "white" {}
+		_MainTex ("Main Texture", 2D) = "white" {}
 	}
 	
 	SubShader
@@ -12,6 +12,7 @@ Shader "_ViriantoTem/HLSL/ScreenCutout"
 			"Queue" = "Transparent"
 			"IgnoreProjector" = "True"
 			"RenderType" = "Transparent"
+			"RenderPipeline" = "UniversalPipeline"
 		}
 		
 		Lighting Off
@@ -23,33 +24,39 @@ Shader "_ViriantoTem/HLSL/ScreenCutout"
 		{
 			HLSLPROGRAM
 
-			#pragma vertex vert
-			#pragma fragment frag
+			#pragma vs vertexShader
+			#pragma ps pixelShader			
 			
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-			struct appdata
+			// UNIFORMS: External parameters
+			// This macro declares _MainTex as a Texture2D object
+			Texture2D<min16float2>(_MainTex);
+			
+			// Data structure: Before vertex shader (mesh info)
+			struct vertexInfo
 			{
 				min16float4 vertex : POSITION;				
 			};
 
-			struct v2f
+			// Data structure: Vertex shader to Pixel shader
+			// (Also called interpolants because values interpolates through the triangle
+			// from one vertex to another)
+			struct v2p
 			{		
 				min16float4 vertex : SV_POSITION;
 				min16float4 screenPos : TEXCOORD0;				
 			};
 
-			v2f vert (appdata v)
+			v2p vertexShader (vertexInfo v)
 			{
-				v2f o;
+				v2p o;
 				o.vertex = TransformObjectToHClip(v.vertex);
 				o.screenPos = ComputeScreenPos(o.vertex);
 				return o;
 			}
-			
-			sampler2D _MainTex;
 
-			min16float4 frag (v2f i) : SV_Target
+			min16float4 pixelShader (v2p i) : SV_Target
 			{
 				i.screenPos /= i.screenPos.w;
 				min16float4 col = tex2D(_MainTex, min16float2(i.screenPos.x, i.screenPos.y));
