@@ -26,23 +26,26 @@ Shader "_ViriantoTem/HLSL/CartoonFX/ToonBasic"
 
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-			sampler2D _MainTex;
-			samplerCUBE _ToonShade;
-			float4 _MainTex_ST;
-			float4 _Color;
+			// UNIFORMS: External parameters
+			// This macro declares _MainTex as a Texture2D object
+			Texture2D<min16float2> _MainTex;
+			min16float4 _MainTex_ST;
+			
+			samplerCUBE _ToonShade;			
+			min16float4 _Color;
 
 			struct appdata 
 			{
-				half4 vertex : POSITION;
-				half2 uv : TEXCOORD0;
-				half3 normal : NORMAL;
+				min16float4 vertex : POSITION;
+				min16float2 uv : TEXCOORD0;
+				min16float3 normal : NORMAL;
 			};
 			
 			struct v2f 
 			{
-				half4 pos : SV_POSITION;
-				half2 uv : TEXCOORD0;
-				half3 normal : TEXCOORD1;
+				min16float4 pos : SV_POSITION;
+				min16float2 uv : TEXCOORD0;
+				min16float3 normal : TEXCOORD1;
 			};
 
 			v2f vertexShader (appdata v)
@@ -61,9 +64,11 @@ Shader "_ViriantoTem/HLSL/CartoonFX/ToonBasic"
 				min16float4 c = min16float4(2.0f * cube.rgb * col.rgb, col.a);
 				return c;
 			}
+			
 			ENDHLSL			
 		}
 	} 
-
-	Fallback "VertexLit"
+	// DISCLAIMER: I don't trust anybody's using Shader Precision Model - UNIFIED.
+	// That's why I'm using 'min16float' instead of 'half' everywhere. If you know what
+	// you're doing, you can change it to half in order to improve readability ^_^
 }

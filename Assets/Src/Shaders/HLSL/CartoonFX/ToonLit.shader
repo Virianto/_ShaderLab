@@ -21,7 +21,8 @@ Shader "_ViriantoTem/HLSL/CartoonFX/ToonLit"
 			
 			Tags
 			{
-				"LightMode" = "UniversalForward"				
+				"LightMode" = "UniversalForward"
+				"RenderPipeline" = "UniversalPipeline"
 			}
 			
 			HLSLPROGRAM
@@ -75,8 +76,11 @@ Shader "_ViriantoTem/HLSL/CartoonFX/ToonLit"
 				min16float3 finalColor = texColor.rgb * light.color * ramp * (light.distanceAttenuation * light.shadowAttenuation);
 				return min16float4(finalColor, texColor.a);
 			}
+			
 			ENDHLSL
 		}
 	}
-	Fallback "Diffuse"
+	// DISCLAIMER: I don't trust anybody's using Shader Precision Model - UNIFIED.
+	// That's why I'm using 'min16float' instead of 'half' everywhere. If you know what
+	// you're doing, you can change it to half in order to improve readability ^_^
 }
