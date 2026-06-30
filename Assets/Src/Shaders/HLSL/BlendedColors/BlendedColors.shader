@@ -1,4 +1,4 @@
-﻿Shader "_ViriantoTem/HLSL/BlendedColors"
+﻿Shader "_ViriantoTem/HLSL/Unlit/BlendedColors"
 {
 	// This pixel shader paints a gradient between the given colors along the X axis in UVs
 	// More documentation can be found in Udemy's course: https://indra.udemy.com/unity-shaders/learn/v4/t/lecture/8602852?start=0
@@ -17,36 +17,46 @@
 
 	SubShader
 	{
+		Tags
+		{
+			"RenderPipeline" = "UniversalPipeline"			
+		}
+		
 		Pass
 		{
 			HLSLPROGRAM
 
-			#pragma vertex vert
-			#pragma fragment frag
+			#pragma vertex vertexShader
+			#pragma fragment pixelShader
 
-			#include "HLSLSupport.cginc"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-			fixed4 _ColorA;
-			fixed4 _ColorB;
-			fixed _Horizontal;
-			fixed _FlipAxis;
-
-			struct appdata
+			// Data structure: Before vertex shader (mesh info)
+			struct vertexInfo
 			{
-				float4 vertexPos : POSITION;
-				fixed2 texCoord : TEXCOORD0;	// This could be float4, or half4, or fixed4... but fixed2 is the most optimus
+				min16float4 vertexPos : POSITION;
+				min16float2 texCoord : TEXCOORD0;	
 			};
 
-			struct v2f
+			// Data structure: Vertex shader to Pixel shader
+			// (Also called interpolants because values interpolates through the triangle
+			// from one vertex to another)
+			struct v2p
 			{
-				float4 vertexPos : SV_POSITION;
-				fixed2 uv : TEXCOORD0;
+				min16float4 vertexPos : SV_POSITION;
+				min16float2 uv : TEXCOORD0;
 			};
+			
+			// UNIFORMS: External parameters
+			
+			min16float4 _ColorA;
+			min16float4 _ColorB;
+			min16float _Horizontal;
+			min16float _FlipAxis;
 
-			v2f vert (appdata v)
+			v2p vertexShader (vertexInfo v)
 			{
-				v2f o;
+				v2p o;
 
 				o.vertexPos = TransformObjectToHClip(v.vertexPos);	
 				o.uv = v.texCoord;
@@ -55,14 +65,18 @@
 			}
 			
 			// The returned value of this fragment function will be a half4 attribute related to the color hardware resource
-			half4 frag (v2f i) : SV_Target
+			min16float4 pixelShader (v2p i) : SV_Target
 			{
-				float direction = _Horizontal ? i.uv.x : i.uv.y;
-				half4 c = _FlipAxis ? lerp(_ColorB, _ColorA, direction) : lerp(_ColorA, _ColorB, direction);
+				min16float direction = _Horizontal ? i.uv.x : i.uv.y;
+				min16float4 c = _FlipAxis ? lerp(_ColorB, _ColorA, direction) : lerp(_ColorA, _ColorB, direction);
 
 				return c;
 			}
+			
 			ENDHLSL
 		}
 	}
+	// DISCLAIMER: I don't trust anybody's using Shader Precision Model - UNIFIED.
+	// That's why I'm using 'min16float' instead of 'half' everywhere. If you know what
+	// you're doing, you can change it to half in order to improve readability ^_^
 }
