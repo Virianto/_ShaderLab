@@ -31,7 +31,7 @@ Shader "_ViriantoTem/HLSL/ScreenCutout"
 
 			// UNIFORMS: External parameters
 			// This macro declares _MainTex as a Texture2D object
-			Texture2D<min16float2>(_MainTex);
+			Texture2D<min16float2> _MainTex;
 			
 			// Data structure: Before vertex shader (mesh info)
 			struct vertexInfo
