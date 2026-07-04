@@ -8,20 +8,7 @@
 
 ---
 
-<div align="left ">
-<div style="position: relative;">
-  <img 
-    alt="Unity"
-    src="https://capsule-render.vercel.app/api?type=venom&height=256&color=FF0099&text=✨"
-    style="width: 50%; position: absolute; left: -128px; top: 0;"
-  >
-    <h2 class="m-0" style="width: 100%; position: absolute; right: -16px; top: -16px;">
-        Available saders
-    </h2>
-</div>
-
-</div>
-
+## ✨ Available saders
 
 > **Check:** This project is currently under development.
 
