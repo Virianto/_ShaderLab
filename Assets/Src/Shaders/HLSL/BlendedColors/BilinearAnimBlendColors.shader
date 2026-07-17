@@ -12,7 +12,7 @@
 		_ColorC("Color C", Color) = (0, 0, 1, 1)
 		_ColorD("Color D", Color) = (1, 0, 1, 1)
 
-		_Speed("Speed", Range(-5, 5)) = 0
+		_Speed("Speed", Range(-5, 5)) = 1
 
 		[Toggle]
 		_Vertical("Vertical gradient", Float) = 1
@@ -20,38 +20,48 @@
 
 	SubShader
 	{
+		Tags
+		{
+			"RenderPipeline" = "UniversalPipeline"
+		}
+				
 		Pass
 		{
 			HLSLPROGRAM
 
-			#pragma vertex vert
-			#pragma fragment frag
+			#pragma vertex vertexShader
+			#pragma fragment pixelShader
 
-			#include "HLSLSupport.cginc"
-			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"			
 
-			fixed4 _ColorA;
-			fixed4 _ColorB;
-			fixed4 _ColorC;
-			fixed4 _ColorD;
-			fixed _Speed;
-			fixed _Vertical;
-
-			struct appdata
+			// Data structure: Before vertex shader (mesh info)
+			struct vertexInfo
 			{
-				float4 vertexPos : POSITION;
-				fixed2 texCoord : TEXCOORD0;	// This could be float4, or half4, or fixed4... but fixed2 is the most optimus
+				min16float4 vertexPos : POSITION;
+				min16float2 texCoord : TEXCOORD0;
 			};
 
-			struct v2f
+			// Data structure: Vertex shader to Pixel shader
+			// (Also called interpolants because values interpolates through the triangle
+			// from one vertex to another)
+			struct v2p
 			{
-				float4 vertexPos : SV_POSITION;
-				fixed2 uv : TEXCOORD0;
+				min16float4 vertexPos : SV_POSITION;
+				min16float2 uv : TEXCOORD0;
 			};
+			
+			// UNIFORMS: External parameters
+			
+			min16float4 _ColorA;
+			min16float4 _ColorB;
+			min16float4 _ColorC;
+			min16float4 _ColorD;
+			min16float _Speed;
+			min16float _Vertical;
 
-			v2f vert(appdata v)
+			v2p vertexShader(vertexInfo v)
 			{
-				v2f o;
+				v2p o;
 
 				o.vertexPos = TransformObjectToHClip(v.vertexPos);
 				o.uv = v.texCoord;
@@ -59,18 +69,18 @@
 				return o;
 			}
 
-			fixed4 frag(v2f i) : SV_Target
+			min16float4 pixelShader(v2p i) : SV_Target
 			{
-				fixed4 finalColorRGBA;
+				min16float4 finalColorRGBA;
 
-				fixed moveDir = _Vertical ? i.uv.x : i.uv.y;
-				fixed gradDir = _Vertical ? i.uv.y : i.uv.x;
+				min16float moveDir = _Vertical ? i.uv.x : i.uv.y;
+				min16float gradDir = _Vertical ? i.uv.y : i.uv.x;
 
-				fixed4 colorY1 = (1.0 - gradDir) * _ColorA.rgba + gradDir * _ColorB.rgba;
-				fixed4 colorY2 = (1.0 - gradDir) * _ColorC.rgba + gradDir * _ColorD.rgba;
+				min16float4 colorY1 = (1.0 - gradDir) * _ColorA.rgba + gradDir * _ColorB.rgba;
+				min16float4 colorY2 = (1.0 - gradDir) * _ColorC.rgba + gradDir * _ColorD.rgba;
 
-				fixed stripe = frac(((moveDir + (_Time.y * _Speed)) * 0.5));
-				fixed smoothedStripe = saturate((1 - (smoothstep(0.5, 1, stripe) + smoothstep(0.5, 1, (1 - stripe)))));
+				min16float stripe = frac(((moveDir + (_Time.y * _Speed)) * 0.5));
+				min16float smoothedStripe = saturate((1 - (smoothstep(0.5, 1, stripe) + smoothstep(0.5, 1, (1 - stripe)))));
 
 				finalColorRGBA = lerp(colorY1.rgba, colorY2.rgba, smoothedStripe);					
 					
