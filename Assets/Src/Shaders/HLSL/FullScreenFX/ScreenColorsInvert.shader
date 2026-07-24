@@ -42,9 +42,9 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenColorsInvert"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blit.hlsl"
            
-            half4 pixelShader(Varyings IN) : SV_Target
+            min16float4 pixelShader(Varyings IN) : SV_Target
             {
-                half4 color = SAMPLE_TEXTURE2D(_BlitTexture, sampler_LinearClamp, IN.texcoord);
+                min16float4 color = SAMPLE_TEXTURE2D(_BlitTexture, sampler_LinearClamp, IN.texcoord);
                 
                 color.rgb = 1 - color.rgb;
                 

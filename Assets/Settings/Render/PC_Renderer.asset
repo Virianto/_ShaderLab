@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b00045f12942b46c698459096c89274e, type: 3}
-  m_Name: FullScreenPassRendererFeature
+  m_Name: ColorsInvert
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.FullScreenPassRendererFeature
   m_Active: 1
   injectionPoint: 600
@@ -48,7 +48,8 @@ MonoBehaviour:
   - {fileID: 7833122117494664109}
   - {fileID: -1001854954293498229}
   - {fileID: 196725866338902391}
-  m_RendererFeatureMap: ad6b866f10d7b46c8beede243ab218f277e1421522e9ba02
+  - {fileID: 3361322833133311958}
+  m_RendererFeatureMap: ad6b866f10d7b46c8beede243ab218f277e1421522e9ba02d61752c44ed1a52e
   m_UseNativeRenderPass: 1
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   m_AssetVersion: 3
@@ -86,13 +87,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b00045f12942b46c698459096c89274e, type: 3}
-  m_Name: FullScreenPassRendererFeature
+  m_Name: ScreenPixelator
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.FullScreenPassRendererFeature
   m_Active: 1
   injectionPoint: 600
   fetchColorBuffer: 1
   requirements: 0
   passMaterial: {fileID: 2100000, guid: 98f806656a247db4297b0e05f54ce91e, type: 2}
+  passIndex: 0
+  bindDepthStencilAttachment: 1
+  m_Version: 1
+--- !u!114 &3361322833133311958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00045f12942b46c698459096c89274e, type: 3}
+  m_Name: VoronoiNoiseBackground
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.FullScreenPassRendererFeature
+  m_Active: 1
+  injectionPoint: 600
+  fetchColorBuffer: 1
+  requirements: 0
+  passMaterial: {fileID: 2100000, guid: aa3b8103cba9e8b4e819e3c30b623b45, type: 2}
   passIndex: 0
   bindDepthStencilAttachment: 1
   m_Version: 1

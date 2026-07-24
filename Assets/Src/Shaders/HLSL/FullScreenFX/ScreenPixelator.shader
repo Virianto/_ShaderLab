@@ -46,11 +46,11 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenPixelator"
             
             int _PixelSize;
            
-            half4 pixelShader(Varyings IN) : SV_Target
+            min16float4 pixelShader(Varyings IN) : SV_Target
             {
-                half2 uv = floor(IN.texcoord * _PixelSize) / _PixelSize;
+                min16float2 uv = floor(IN.texcoord * _PixelSize) / _PixelSize;
                 
-                half4 color = SAMPLE_TEXTURE2D(_BlitTexture, sampler_PointClamp, uv);
+                min16float4 color = SAMPLE_TEXTURE2D(_BlitTexture, sampler_PointClamp, uv);
                 
                 return color;
             }
