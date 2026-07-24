@@ -34,18 +34,31 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/SimpleScreenFX"
 
             struct vertexInfo
             {
-                half4 positionOS : POSITION;
-                half2 uv : TEXCOORD0;
+                uint vertexID : SV_VertexID;
             };
 
             struct v2p
             {
-                half4 positionHCS : SV_POSITION;
+                half4 positionCS : SV_POSITION;
                 half2 uv : TEXCOORD0;
             };
 
             TEXTURE2D(_BlitTexture);
             SAMPLER(sampler_BlitTexture);
+
+            v2p vertexShader(vertexInfo input)
+            {
+                v2p o;
+
+                o.uv = half2(
+                    (input.vertexID << 1) & 2,
+                    input.vertexID & 2
+                );
+
+                o.positionCS = half4(o.uv * 2.0 - 1.0, 0.0, 1.0);
+
+                return o;
+            }
            
             half4 pixelShader(v2p IN) : SV_Target
             {
