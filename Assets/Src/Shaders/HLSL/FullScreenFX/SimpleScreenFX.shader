@@ -10,8 +10,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/SimpleScreenFX"
     
     Properties
     {
-        [MainColor] _BaseColor("Base Color", Color) = (1, 1, 1, 1)
-        [MainTexture] _BaseMap("Base Map", 2D) = "white" {}
+        
     }
 
     SubShader
@@ -24,6 +23,8 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/SimpleScreenFX"
 
         Pass
         {
+            Name "FullScreenPass"
+            
             HLSLPROGRAM
 
             #pragma vertex vertexShader
@@ -33,35 +34,25 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/SimpleScreenFX"
 
             struct vertexInfo
             {
-                float4 positionOS : POSITION;
-                float2 uv : TEXCOORD0;
+                half4 positionOS : POSITION;
+                half2 uv : TEXCOORD0;
             };
 
             struct v2p
             {
-                float4 positionHCS : SV_POSITION;
-                float2 uv : TEXCOORD0;
+                half4 positionHCS : SV_POSITION;
+                half2 uv : TEXCOORD0;
             };
 
-            TEXTURE2D(_BaseMap);
-            SAMPLER(sampler_BaseMap);
-
-            CBUFFER_START(UnityPerMaterial)
-                half4 _BaseColor;
-                float4 _BaseMap_ST;
-            CBUFFER_END
-
-            v2p vertexShader(vertexInfo IN)
-            {
-                v2p OUT;
-                OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
-                OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
-                return OUT;
-            }
-
+            TEXTURE2D(_BlitTexture);
+            SAMPLER(sampler_BlitTexture);
+           
             half4 pixelShader(v2p IN) : SV_Target
             {
-                half4 color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * _BaseColor;
+                half4 color = SAMPLE_TEXTURE2D(_BlitTexture, sampler_BlitTexture, IN.uv);
+                
+                color.rgb = 1 - color.rgb;
+                
                 return color;
             }
             
