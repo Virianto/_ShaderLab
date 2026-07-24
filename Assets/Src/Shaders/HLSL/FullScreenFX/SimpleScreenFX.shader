@@ -26,6 +26,9 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/SimpleScreenFX"
             "RenderPipeline" = "UniversalPipeline"
             "RenderType" = "Transparent"
         }
+        
+        ZWrite Off
+        Cull Off
 
         Pass
         {
@@ -36,6 +39,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/SimpleScreenFX"
             #pragma vertex Vert
 			#pragma fragment pixelShader
 
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blit.hlsl"
            
             half4 pixelShader(Varyings IN) : SV_Target
