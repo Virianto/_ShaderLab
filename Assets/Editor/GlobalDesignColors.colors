@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12323, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: GlobalDesignColors
+  m_EditorClassIdentifier: UnityEditor.dll::UnityEditor.ColorPresetLibrary
+  m_Presets:
+  - m_Name: primary
+    m_Color: {r: 0.05882353, g: 0.78039216, b: 0.74901961, a: 1}
+  - m_Name: primary-hover
+    m_Color: {r: 0.09019608, g: 0.96862745, b: 0.93725490, a: 1}
+  - m_Name: primary-press
+    m_Color: {r: 0.02745098, g: 0.49803922, b: 0.43529412, a: 1}
+  - m_Name: primary-soft
+    m_Color: {r: 0.05882353, g: 0.78039216, b: 0.74901961, a: 0.15}
+  - m_Name: secondary
+    m_Color: {r: 0.93725490, g: 0.43529412, b: 0.05882353, a: 1}
+  - m_Name: secondary-hover
+    m_Color: {r: 1.0, g: 0.59215686, b: 0.09019608, a: 1}
+  - m_Name: secondary-press
+    m_Color: {r: 0.68627451, g: 0.24705882, b: 0.02745098, a: 1}
+  - m_Name: secondary-soft
+    m_Color: {r: 0.93725490, g: 0.43529412, b: 0.05882353, a: 0.15}
+  - m_Name: tertiary
+    m_Color: {r: 0.46666667, g: 0.05882353, b: 0.96862745, a: 1}
+  - m_Name: tertiary-hover
+    m_Color: {r: 0.65490196, g: 0.09019608, b: 1.0, a: 1}
+  - m_Name: tertiary-press
+    m_Color: {r: 0.27843137, g: 0.02745098, b: 0.68627451, a: 1}
+  - m_Name: tertiary-soft
+    m_Color: {r: 0.46666667, g: 0.05882353, b: 0.96862745, a: 0.15}
+  - m_Name: quaternary
+    m_Color: {r: 0.93725490, g: 0.05882353, b: 0.43529412, a: 1}
+  - m_Name: quaternary-hover
+    m_Color: {r: 1.0, g: 0.09019608, b: 0.62352941, a: 1}
+  - m_Name: quaternary-press
+    m_Color: {r: 0.68627451, g: 0.02745098, b: 0.24705882, a: 1}
+  - m_Name: quaternary-soft
+    m_Color: {r: 0.93725490, g: 0.05882353, b: 0.43529412, a: 0.15}
+  - m_Name: surface-primary
+    m_Color: {r: 0, g: 0.05882353, b: 0.05882353, a: 1}
+  - m_Name: surface-primary-elev
+    m_Color: {r: 0, g: 0.12156863, b: 0.09019608, a: 1}
+  - m_Name: surface-primary-hover
+    m_Color: {r: 0, g: 0.15294118, b: 0.12156863, a: 1}
+  - m_Name: border-primary
+    m_Color: {r: 0, g: 0.18431373, b: 0.18431373, a: 1}
+  - m_Name: border-primary-strong
+    m_Color: {r: 0, g: 0.24705882, b: 0.24705882, a: 1}
+  - m_Name: surface-secondary
+    m_Color: {r: 0.09019608, g: 0.02745098, b: 0, a: 1}
+  - m_Name: surface-secondary-elev
+    m_Color: {r: 0.15294118, g: 0.05882353, b: 0, a: 1}
+  - m_Name: surface-secondary-hover
+    m_Color: {r: 0.18431373, g: 0.09019608, b: 0, a: 1}
+  - m_Name: border-secondary
+    m_Color: {r: 0.24705882, g: 0.12156863, b: 0, a: 1}
+  - m_Name: border-secondary-strong
+    m_Color: {r: 0.30980392, g: 0.15294118, b: 0, a: 1}
+  - m_Name: surface-tertiary
+    m_Color: {r: 0.05882353, g: 0, b: 0.05882353, a: 1}
+  - m_Name: surface-tertiary-elev
+    m_Color: {r: 0.09019608, g: 0, b: 0.12156863, a: 1}
+  - m_Name: surface-tertiary-hover
+    m_Color: {r: 0.12156863, g: 0, b: 0.15294118, a: 1}
+  - m_Name: border-tertiary
+    m_Color: {r: 0.21568627, g: 0, b: 0.21568627, a: 1}
+  - m_Name: border-tertiary-strong
+    m_Color: {r: 0.24705882, g: 0, b: 0.30980392, a: 1}
+  - m_Name: surface-quaternary
+    m_Color: {r: 0.09019608, g: 0, b: 0.02745098, a: 1}
+  - m_Name: surface-quaternary-elev
+    m_Color: {r: 0.15294118, g: 0, b: 0.05882353, a: 1}
+  - m_Name: surface-quaternary-hover
+    m_Color: {r: 0.18431373, g: 0, b: 0.09019608, a: 1}
+  - m_Name: border-quaternary
+    m_Color: {r: 0.24705882, g: 0, b: 0.12156863, a: 1}
+  - m_Name: border-quaternary-strong
+    m_Color: {r: 0.30980392, g: 0, b: 0.18431373, a: 1}
+  - m_Name: bg-neutral-dark
+    m_Color: {r: 0.09019608, g: 0.09019608, b: 0.09019608, a: 1}
+  - m_Name: bg-neutral-bright
+    m_Color: {r: 0.93725490, g: 0.93725490, b: 0.93725490, a: 1}
+  - m_Name: overlay
+    m_Color: {r: 0.05882353, g: 0.05882353, b: 0.05882353, a: 0.6}
+  - m_Name: text-primary
+    m_Color: {r: 0.90588235, g: 0.90588235, b: 0.90588235, a: 1}
+  - m_Name: text-secondary
+    m_Color: {r: 0.65490196, g: 0.65490196, b: 0.65490196, a: 1}
+  - m_Name: text-disabled
+    m_Color: {r: 0.43529412, g: 0.43529412, b: 0.43529412, a: 1}
+  - m_Name: text-on-accent
+    m_Color: {r: 0.05882353, g: 0.05882353, b: 0.05882353, a: 1}
+  - m_Name: text-special-1
+    m_Color: {r: 0.24705882, g: 1, b: 0.96862745, a: 1}
+  - m_Name: text-special-2
+    m_Color: {r: 1, g: 0.62352941, b: 0.24705882, a: 1}
+  - m_Name: text-special-3
+    m_Color: {r: 0.65490196, g: 0.27843137, b: 1, a: 1}
+  - m_Name: text-special-4
+    m_Color: {r: 1, g: 0.27843137, b: 0.65490196, a: 1}
