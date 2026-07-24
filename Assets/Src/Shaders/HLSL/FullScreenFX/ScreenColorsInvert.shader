@@ -1,4 +1,4 @@
-Shader "_ViriantoTem/HLSL/FullScreenFX/SimpleScreenFX"
+Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenColorsInvert"
 {
     // This shader is used to render a fullscreen effect.
     
