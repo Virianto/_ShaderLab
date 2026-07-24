@@ -1,6 +1,12 @@
 Shader "_ViriantoTem/HLSL/FullScreenFX/SimpleScreenFX"
 {
-    // This shader is used to render a fullscreen quad with a single color and texture.
+    // This shader is used to render a fullscreen effect.
+    
+    // To keep it simple, we'll be including Runtime/Utilities/Blit.hlsl which means:
+    // 1. Pragma Vertex is declared but not implemented here
+    // 2. fragmentShader input MUST be of type "Varyings" as it's declared in Blit.hlsl
+    // 3. There's no need to declare TEXTURE2D(_BlitTexture) nor its sampler
+    
     // Screen UVs are mapped like this:
     /*  (0,0) -------- (1,0)
         |                  |
@@ -27,42 +33,14 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/SimpleScreenFX"
             
             HLSLPROGRAM
 
-            #pragma vertex vertexShader
+            #pragma vertex Vert
 			#pragma fragment pixelShader
 
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-
-            struct vertexInfo
-            {
-                uint vertexID : SV_VertexID;
-            };
-
-            struct v2p
-            {
-                half4 positionCS : SV_POSITION;
-                half2 uv : TEXCOORD0;
-            };
-
-            TEXTURE2D(_BlitTexture);
-            SAMPLER(sampler_BlitTexture);
-
-            v2p vertexShader(vertexInfo input)
-            {
-                v2p o;
-
-                o.uv = half2(
-                    (input.vertexID << 1) & 2,
-                    input.vertexID & 2
-                );
-
-                o.positionCS = half4(o.uv * 2.0 - 1.0, 0.0, 1.0);
-
-                return o;
-            }
+            #include "Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blit.hlsl"
            
-            half4 pixelShader(v2p IN) : SV_Target
+            half4 pixelShader(Varyings IN) : SV_Target
             {
-                half4 color = SAMPLE_TEXTURE2D(_BlitTexture, sampler_BlitTexture, IN.uv);
+                half4 color = SAMPLE_TEXTURE2D(_BlitTexture, sampler_LinearClamp, IN.texcoord);
                 
                 color.rgb = 1 - color.rgb;
                 
