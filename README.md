@@ -15,6 +15,7 @@
 - **Color blending**
 - **Color animation**
 - **Dissolve effects**
+- **Full screen effects**
 
 ---
 
@@ -31,6 +32,18 @@
 <div align="center">
   <img src="GIFs/AnimTexHighlightColor_1.gif" alt="Animated Texture Highlighting Color GIF" width="360" />
 </div>
+
+---
+
+## 🛠️ How to use this repository
+
+1. **Clone** the project
+2. **Open it in Unity**
+3. Search for any shader and its paired material
+4. *In case you want to use full screen effects*:
+   5. Find your main Renderer data (PC_Renderer in this project)
+   6. Add "Renderer Feature" - Full Screen Pass Renderer Feature
+   7. Customize the configuration and link your material
 
 ---
 
