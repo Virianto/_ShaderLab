@@ -33,6 +33,13 @@
   <img src="GIFs/AnimTexHighlightColor_1.gif" alt="Animated Texture Highlighting Color GIF" width="360" />
 </div>
 
+> **Full screen effects (Graph and HLSL)**
+
+<div align="center">
+   <img src="GIFs/FullScreenFX_1.gif" alt="Vignetted Voronoi GIF" width="360" />
+   <img src="GIFs/FullScreenFX_2.gif" alt="Color inversion and pixelation GIF" width="360" />
+</div>
+
 ---
 
 ## 🛠️ How to use this repository
