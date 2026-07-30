@@ -1,5 +1,25 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5785774280125714628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00045f12942b46c698459096c89274e, type: 3}
+  m_Name: CursorMarker
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.FullScreenPassRendererFeature
+  m_Active: 1
+  injectionPoint: 600
+  fetchColorBuffer: 0
+  requirements: 0
+  passMaterial: {fileID: 2100000, guid: ce0d4e2c2457fcb4680b777b4d402199, type: 2}
+  passIndex: 0
+  bindDepthStencilAttachment: 0
+  m_Version: 1
 --- !u!114 &-1001854954293498229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49,7 +69,8 @@ MonoBehaviour:
   - {fileID: -1001854954293498229}
   - {fileID: 3361322833133311958}
   - {fileID: 196725866338902391}
-  m_RendererFeatureMap: ad6b866f10d7b46c8beede243ab218f2d61752c44ed1a52e77e1421522e9ba02
+  - {fileID: -5785774280125714628}
+  m_RendererFeatureMap: ad6b866f10d7b46c8beede243ab218f2d61752c44ed1a52e77e1421522e9ba023cef8352f2ccb4af
   m_UseNativeRenderPass: 1
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   m_AssetVersion: 3
