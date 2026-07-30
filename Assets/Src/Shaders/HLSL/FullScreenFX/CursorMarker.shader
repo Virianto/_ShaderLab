@@ -52,13 +52,21 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/CursorMarker"
            
             min16float4 pixelShader(Varyings IN) : SV_Target
             {
-                min16float2 currentPosition = _CursorPos.xy;
+                min16float dist = distance(IN.texcoord, _CursorPos.xy);
+
+                min16float circle = step(dist, _Radius);
+
+                min16float4 background = float4(0,0,0,1);
+
+                return lerp(background, _Color, circle);
+                
+                /*min16float2 currentPosition = _CursorPos.xy;
                 
                 min16float2 uv = floor(IN.texcoord * _PixelSize) / _PixelSize;
                 
                 min16float4 color = SAMPLE_TEXTURE2D(_BlitTexture, sampler_PointClamp, uv);
                 
-                return color;
+                return color;*/
             }
             
             ENDHLSL
