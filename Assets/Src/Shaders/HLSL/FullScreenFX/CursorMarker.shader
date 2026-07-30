@@ -17,7 +17,8 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/CursorMarker"
     
     Properties
     {
-        _PixelSize("Pixel Size", Range(4, 128)) = 8
+        _Color("Color", Color) = (1, 1, 1, 1)
+        _Radius("Radius", Range(4, 128)) = 8
     }
 
     SubShader
@@ -45,10 +46,14 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/CursorMarker"
             
             // UNIFORMS: External parameters
             
-            int _PixelSize;
+            min16float4 _Color;
+            min16float _Radius;
+            min16float4 _CursorPos;
            
             min16float4 pixelShader(Varyings IN) : SV_Target
             {
+                min16float2 currentPosition = _CursorPos.xy;
+                
                 min16float2 uv = floor(IN.texcoord * _PixelSize) / _PixelSize;
                 
                 min16float4 color = SAMPLE_TEXTURE2D(_BlitTexture, sampler_PointClamp, uv);
