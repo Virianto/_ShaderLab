@@ -17,7 +17,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/CursorMarker"
     
     Properties
     {
-        _Color("Color", Color) = (1, 1, 1, 1)
+        _Color("Color", Color) = (1, 1, 1, 0)
         _Radius("Radius", Range(4, 128)) = 8
     }
 
@@ -33,9 +33,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/CursorMarker"
         Cull Off
 
         Pass
-        {
-            Name "FullScreenPass"
-            
+        {            
             HLSLPROGRAM
 
             #pragma vertex Vert
@@ -56,11 +54,15 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/CursorMarker"
 
                 min16float circle = step(dist, _Radius);
 
-                min16float4 background = float4(0,0,0,1);
+                min16float4 background = float4(0,0,0,0);
                 
                 min16float4 result = SAMPLE_TEXTURE2D(_BlitTexture, sampler_LinearClamp, IN.texcoord);
 
                 //result = step(result, _Color * circle) ? _Color : result;
+                
+                result = lerp(background, _Color, circle);
+                
+                clip( result.a <= 0 ? -1 : 1 );
                 
                 return result;
                 
