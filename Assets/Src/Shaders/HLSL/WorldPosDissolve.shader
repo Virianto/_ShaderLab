@@ -33,9 +33,9 @@ Shader "_ViriantoTem/HLSL/WorldPosDissolve"
     {
         Tags
         {
-            "RenderType" = "Transparent"
-            "Queue" = "Transparent"
             "RenderPipeline" = "UniversalRenderPipeline"
+            "RenderType" = "Transparent"
+            "Queue" = "Transparent"            
         }
 
         Blend SrcAlpha OneMinusSrcAlpha
@@ -47,7 +47,7 @@ Shader "_ViriantoTem/HLSL/WorldPosDissolve"
             #pragma vertex vert
             #pragma fragment frag
             
-            #include "HLSLSupport.cginc"
+            //#include "HLSLSupport.cginc"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             struct appdata
@@ -70,7 +70,7 @@ Shader "_ViriantoTem/HLSL/WorldPosDissolve"
             half _ParticlesRadius[100];
             half3 _ParticlesPositions[100];
 
-            fixed _ShouldAppear;
+            half _ShouldAppear;
 
             sampler2D _MainTex;
             half4 _Color;
@@ -90,9 +90,9 @@ Shader "_ViriantoTem/HLSL/WorldPosDissolve"
                 return o;
             }
 
-            fixed4 frag (v2f i) : SV_Target
+            half4 frag (v2f i) : SV_Target
             {
-                fixed4 c = tex2D(_MainTex, i.uv) * _Color;
+                half4 c = tex2D(_MainTex, i.uv) * _Color;
                 float dis;
 
                 c.a = 0;
@@ -148,4 +148,7 @@ Shader "_ViriantoTem/HLSL/WorldPosDissolve"
             ENDHLSL
         }
     }
+    // DISCLAIMER: I don't trust anybody's using Shader Precision Model - UNIFIED.
+	// That's why I'm using 'min16float' instead of 'half' everywhere. If you know what
+	// you're doing, you can change it to half in order to improve readability ^_^
 }
