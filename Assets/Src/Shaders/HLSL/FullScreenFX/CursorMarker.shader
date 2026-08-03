@@ -58,9 +58,13 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/CursorMarker"
 
                 min16float4 background = float4(0,0,0,1);
                 
-                min16float4 result = SAMPLE_TEXTURE2D(_BlitTexture, sampler_PointClamp, uv);
+                min16float4 result = SAMPLE_TEXTURE2D(_BlitTexture, sampler_LinearClamp, IN.texcoord);
 
-                return step(result, _Color, circle);
+                //result = step(result, _Color * circle) ? _Color : result;
+                
+                return result;
+                
+                //return step(result, _Color * circle);
                 
                 //return lerp(background, _Color, circle);
                 
