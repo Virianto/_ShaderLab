@@ -1,6 +1,10 @@
 using UnityEngine;
 
-public class CParticlesShader : MonoBehaviour
+/// <summary>
+/// Make sure the Particle System is in "World" Simulated Space. Otherwise the position of
+/// each particle won't be correct unless the system is placed in (0,0,0)
+/// </summary>
+public class M_PSystemToShader : MonoBehaviour
 {
     #region ATTRIBUTES
 
@@ -39,26 +43,16 @@ public class CParticlesShader : MonoBehaviour
     void LateUpdate()
     {
         mainParticleSystem.GetParticles(currentParticlesInScene);
+        
         for (int p = 0; p < maxParticlesCount; ++p)
         {
             particlePositions[p] = currentParticlesInScene[p].position;
             particleRadius[p] = currentParticlesInScene[p].GetCurrentSize(mainParticleSystem);
         }
-
-        Vector4 x = currentParticlesInScene[5].position;
-        Vector4 y = mainParticleSystem.transform.InverseTransformPoint(currentParticlesInScene[5].position);
-        
-        Debug.LogFormat("Partícula 1 local: {0} y global: {1}", x, y);
         
         RefreshShaderData();        
     }
-
-
-    void GetAllShaderData()
-    {
-        float[] radius = stencilShaderMaterial.GetFloatArray("_ParticlesRadius");
-        Vector4[] positions = stencilShaderMaterial.GetVectorArray("_ParticlesPositions");
-    }
+    
     void RefreshShaderData()
     {                 
         stencilShaderMaterial.SetVectorArray("_ParticlesPositions", particlePositions);
