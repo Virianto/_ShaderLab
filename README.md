@@ -40,6 +40,12 @@
    <img src="GIFs/FullScreenFX_2.gif" alt="Color inversion and pixelation GIF" width="360" />
 </div>
 
+> **World space stencil linked to particle system**
+
+<div align="center">
+  <img src="GIFs/WorldPosStencil_1.gif" alt="World position stencil GIF" width="360" />
+</div>
+
 ---
 
 ## 🛠️ How to use this repository
