@@ -5139,7 +5139,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CParticlesShader
   mainParticleSystem: {fileID: 23137581}
-  stencilShaderMaterial: {fileID: 2100000, guid: 29565ee5bb5d3d043bb4f774ea677e4e, type: 2}
+  stencilShaderMaterialList:
+  - {fileID: 2100000, guid: 29565ee5bb5d3d043bb4f774ea677e4e, type: 2}
+  - {fileID: 2100000, guid: 054aaf978d7a7cd459f11707a100569f, type: 2}
+  - {fileID: 2100000, guid: 2f7226d1194edf94c8918b17c8aa1fce, type: 2}
+  - {fileID: 2100000, guid: 9e543832c58783a4d8ff812539dc5690, type: 2}
   stencilRadius: 6
 --- !u!1 &203844586
 GameObject:

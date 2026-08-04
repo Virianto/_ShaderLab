@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -11,7 +12,8 @@ public class M_PSystemToShader : MonoBehaviour
     [Header("External references")]
 
     [SerializeField] ParticleSystem mainParticleSystem;
-    [SerializeField] Material stencilShaderMaterial;
+
+    [SerializeField] List<Material> stencilShaderMaterialList = new();
 
     [Header("Editable values")]
 
@@ -37,7 +39,12 @@ public class M_PSystemToShader : MonoBehaviour
     {
         particlePositions = new Vector4[maxParticlesCount];
         particleRadius = new float[maxParticlesCount];
-        stencilShaderMaterial.SetFloat("_ParticlesCount", maxParticlesCount);
+
+        foreach (Material m in stencilShaderMaterialList)
+        {
+            m.SetFloat("_ParticlesCount", maxParticlesCount);
+        }
+        
     }
 
     void LateUpdate()
@@ -54,10 +61,13 @@ public class M_PSystemToShader : MonoBehaviour
     }
     
     void RefreshShaderData()
-    {                 
-        stencilShaderMaterial.SetVectorArray("_ParticlesPositions", particlePositions);
-        stencilShaderMaterial.SetFloatArray("_ParticlesRadius", particleRadius);
-        stencilShaderMaterial.SetFloat("_Radius", stencilRadius);                
+    {   
+        foreach (Material m in stencilShaderMaterialList)
+        {
+            m.SetVectorArray("_ParticlesPositions", particlePositions);
+            m.SetFloatArray("_ParticlesRadius", particleRadius);
+            m.SetFloat("_Radius", stencilRadius);   
+        }
     }
 
     #endregion
