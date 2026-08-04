@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WorldPositionDissolve
+  m_Name: WPD_Quaternary
   m_Shader: {fileID: 4800000, guid: 243d52ee3558caf48be1d9375d7450d9, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -140,8 +140,8 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.02745098, g: 0.49803922, b: 0.43529412, a: 1}
-    - _DisLineColor: {r: 0.6862745, g: 0.02745098, b: 0.24705882, a: 1}
+    - _Color: {r: 0.6862745, g: 0.02745098, b: 0.24705882, a: 1}
+    - _DisLineColor: {r: 0.02745098, g: 0.49803922, b: 0.43529412, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Position: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
