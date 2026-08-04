@@ -15,14 +15,11 @@ public class ParticleSystemToShader : MonoBehaviour
     
     #region METHODS
 
-    void Awake()
+    void Start()
     {
         _myParticleSystem = GetComponent<ParticleSystem>();
         _particles = new ParticleSystem.Particle[_myParticleSystem.main.maxParticles];
-    }
-
-    void Start()
-    {
+        
         myMaterial.SetFloat("_ParticlesCount", _particles.Length);
     }
 
