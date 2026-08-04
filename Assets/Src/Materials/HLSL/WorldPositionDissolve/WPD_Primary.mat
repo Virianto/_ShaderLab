@@ -124,7 +124,7 @@ Material:
     - _NScale: 0.91
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _ParticlesCount: 100
+    - _ParticlesCount: 256
     - _QueueOffset: 0
     - _Radius: 6
     - _ReceiveShadows: 1

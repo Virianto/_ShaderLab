@@ -52,33 +52,33 @@ Shader "_ViriantoTem/HLSL/WorldPosDissolve"
 
             struct appdata
             {
-                half4 vertex : POSITION;                
-                half2 uv : TEXCOORD0;
-                half3 normal : NORMAL;
+                min16float4 vertex : POSITION;                
+                min16float2 uv : TEXCOORD0;
+                min16float3 normal : NORMAL;
             };
 
             struct v2f
             {
-                half2 uv : TEXCOORD0;                
-                half4 vertex : SV_POSITION;
-                half3 worldPos : TEXCOORD1; // Sirve para obtener la posici�n en el mundo
+                min16float2 uv : TEXCOORD0;                
+                min16float4 vertex : SV_POSITION;
+                min16float3 worldPos : TEXCOORD1; // Sirve para obtener la posici�n en el mundo
             };
 
 
-            half3 _Position;
-            half _ParticlesCount;
-            half _ParticlesRadius[100];
-            half3 _ParticlesPositions[100];
+            min16float3 _Position;
+            min16float _ParticlesCount;
+            min16float _ParticlesRadius[256];
+            min16float3 _ParticlesPositions[256];
 
-            half _ShouldAppear;
+            min16float _ShouldAppear;
 
             sampler2D _MainTex;
-            half4 _Color;
+            min16float4 _Color;
             sampler2D _NoiseTex;
-            half _DisAmount, _NScale;
-            half _DisLineWidth;
-            half4 _DisLineColor;
-            half _Radius;
+            min16float _DisAmount, _NScale;
+            min16float _DisLineWidth;
+            min16float4 _DisLineColor;
+            min16float _Radius;
 
             v2f vert (appdata v)
             {
@@ -90,10 +90,10 @@ Shader "_ViriantoTem/HLSL/WorldPosDissolve"
                 return o;
             }
 
-            half4 frag (v2f i) : SV_Target
+            min16float4 frag (v2f i) : SV_Target
             {
-                half4 c = tex2D(_MainTex, i.uv) * _Color;
-                float dis;
+                min16float4 c = tex2D(_MainTex, i.uv) * _Color;
+                min16float dis;
 
                 c.a = 0;
 
