@@ -44,6 +44,11 @@ public class CParticlesShader : MonoBehaviour
             particlePositions[p] = currentParticlesInScene[p].position;
             particleRadius[p] = currentParticlesInScene[p].GetCurrentSize(mainParticleSystem);
         }
+
+        Vector4 x = currentParticlesInScene[5].position;
+        Vector4 y = mainParticleSystem.transform.InverseTransformPoint(currentParticlesInScene[5].position);
+        
+        Debug.LogFormat("Partícula 1 local: {0} y global: {1}", x, y);
         
         RefreshShaderData();        
     }
