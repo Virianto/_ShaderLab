@@ -18,7 +18,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/CursorMarker"
     Properties
     {
         _Color("Color", Color) = (1, 1, 1, 0)
-        _Radius("Radius", Range(4, 128)) = 8
+        _Radius("Radius", Range(0, 32)) = 1
     }
 
     SubShader
@@ -65,18 +65,6 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/CursorMarker"
                 clip( result.a <= 0 ? -1 : 1 );
                 
                 return result;
-                
-                //return step(result, _Color * circle);
-                
-                //return lerp(background, _Color, circle);
-                
-                /*min16float2 currentPosition = _CursorPos.xy;
-                
-                min16float2 uv = floor(IN.texcoord * _PixelSize) / _PixelSize;
-                
-                min16float4 color = SAMPLE_TEXTURE2D(_BlitTexture, sampler_PointClamp, uv);
-                
-                return color;*/
             }
             
             ENDHLSL
