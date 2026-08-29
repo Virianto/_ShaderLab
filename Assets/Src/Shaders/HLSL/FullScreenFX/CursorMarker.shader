@@ -50,7 +50,16 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/CursorMarker"
            
             min16float4 pixelShader(Varyings IN) : SV_Target
             {
-                min16float dist = distance(IN.texcoord, _CursorPos.xy);
+                // This is possible thanks to the HLSL include
+                min10float aspect = _ScreenParams.x / _ScreenParams.y;
+                min10float2 uv = IN.texcoord;
+                
+                // Scalating
+                uv.x *= aspect;
+                _CursorPos.x *= aspect;
+                
+                //min16float dist = distance(IN.texcoord, _CursorPos.xy);
+                min16float dist = distance(uv, _CursorPos.xy);
 
                 min16float circle = step(dist, _Radius);
 
