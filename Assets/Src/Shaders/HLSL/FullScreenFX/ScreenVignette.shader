@@ -49,15 +49,38 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVignette"
             
             // UNIFORMS: External parameters
             
+            min10float2 _VignetteCenter;
             min16float _VignetteIntensity;
             min16float _VignetteRadius;
            
             min16float4 pixelShader(Varyings IN) : SV_Target
             {
+                _VignetteCenter = (0.5f, 0.5f);
+                
                 // This is possible thanks to the HLSL include
                 min10float aspect = _ScreenParams.x / _ScreenParams.y;
                 min10float2 uv = IN.texcoord;
                 
+                //
+                min16float4 result = min16float4(0, 0, 0, 0);
+                
+                float2 centeredUV = IN.texcoord - 0.5;
+
+                float vignette =
+                pow(
+                    length(_VignetteCenter) * _VignetteIntensity,
+                    _VignetteRadius
+                    );
+
+                vignette = saturate(vignette);
+
+                result.rgb *= (1.0 - vignette);
+                return result;
+                
+                
+               // min16float4 color = SAMPLE_TEXTURE2D(_BlitTexture, sampler_PointClamp, uv);
+                
+                //return color;
             }
             
             ENDHLSL
