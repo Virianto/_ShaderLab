@@ -1,6 +1,5 @@
 Shader "_ViriantoTem/HLSL/FullScreenFX/CursorMarker"
-{
-    
+{    
     // This shader is used to render a fullscreen effect.
     
     // To keep it simple, we'll be including Runtime/Utilities/Blit.hlsl which means:
@@ -18,7 +17,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/CursorMarker"
     Properties
     {
         _Color("Color", Color) = (1, 1, 1, 0)
-        _Radius("Radius", Range(-1, 1)) = 0.15
+        _Radius("Radius", Range(0, 1)) = 0.15
     }
 
     SubShader
@@ -58,18 +57,13 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/CursorMarker"
                 uv.x *= aspect;
                 _CursorPos.x *= aspect;
                 
-                //min16float dist = distance(IN.texcoord, _CursorPos.xy);
-                min16float dist = distance(uv, _CursorPos.xy);
+                min10float dist = distance(uv, _CursorPos.xy);
 
-                min16float circle = step(dist, _Radius);
+                min10float circle = step(dist, _Radius);
 
-                min16float4 background = float4(0,0,0,0);
+                min10float4 background = float4(0,0,0,0);
                 
-                min16float4 result = SAMPLE_TEXTURE2D(_BlitTexture, sampler_LinearClamp, IN.texcoord);
-
-                //result = step(result, _Color * circle) ? _Color : result;
-                
-                result = lerp(background, _Color, circle);
+                min16float4 result = lerp(background, _Color, circle);
                 
                 clip( result.a <= 0 ? -1 : 1 );
                 
