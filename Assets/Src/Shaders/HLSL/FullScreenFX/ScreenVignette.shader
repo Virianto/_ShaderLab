@@ -1,58 +1,69 @@
 Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVignette"
 {
+    // This shader is used to render a fullscreen effect.
+    
+    // To keep it simple, we'll be including Runtime/Utilities/Blit.hlsl which means:
+    // 1. Pragma Vertex is declared but not implemented here
+    // 2. fragmentShader input MUST be of type "Varyings" as it's declared in Blit.hlsl
+    // 3. There's no need to declare TEXTURE2D(_BlitTexture) nor its sampler
+    
+    // Screen UVs are mapped like this:
+    /*  (0,0) -------- (1,0)
+        |                  |
+        |                  |
+        |                  |
+        (0,1) -------- (1,1) */
+    
     Properties
     {
-        [MainColor] _BaseColor("Base Color", Color) = (1, 1, 1, 1)
-        [MainTexture] _BaseMap("Base Map", 2D) = "white" {}
+        _VignetteIntensity("Vignette Intensity", Range(-1, 1)) = 8
+        
+        [IntRange]
+        _VignetteRadius("Vignette Radius", Range(-127, 127)) = 8
+        
+        // Definir un centro editable desde código para combinar con el cursor
     }
 
     SubShader
     {
-        Tags { "RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline" }
+        Tags
+        {
+            "RenderPipeline" = "UniversalPipeline"
+            "RenderType" = "Transparent"
+        }
+        
+        ZWrite Off
+        Cull Off
 
         Pass
         {
+            Name "FullScreenPass"
+            
             HLSLPROGRAM
 
-            #pragma vertex vert
-            #pragma fragment frag
+            #pragma vertex Vert
+			#pragma fragment pixelShader
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-
-            struct Attributes
+            #include "Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blit.hlsl"
+            
+            // UNIFORMS: External parameters
+            
+            min16float _VignetteIntensity;
+            min16float _VignetteRadius;
+           
+            min16float4 pixelShader(Varyings IN) : SV_Target
             {
-                float4 positionOS : POSITION;
-                float2 uv : TEXCOORD0;
-            };
-
-            struct Varyings
-            {
-                float4 positionHCS : SV_POSITION;
-                float2 uv : TEXCOORD0;
-            };
-
-            TEXTURE2D(_BaseMap);
-            SAMPLER(sampler_BaseMap);
-
-            CBUFFER_START(UnityPerMaterial)
-                half4 _BaseColor;
-                float4 _BaseMap_ST;
-            CBUFFER_END
-
-            Varyings vert(Attributes IN)
-            {
-                Varyings OUT;
-                OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
-                OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
-                return OUT;
+                // This is possible thanks to the HLSL include
+                min10float aspect = _ScreenParams.x / _ScreenParams.y;
+                min10float2 uv = IN.texcoord;
+                
             }
-
-            half4 frag(Varyings IN) : SV_Target
-            {
-                half4 color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * _BaseColor;
-                return color;
-            }
+            
             ENDHLSL
         }
     }
+    // DISCLAIMER: I don't trust anybody's using Shader Precision Model - UNIFIED.
+	// That's why I'm using 'min16float' instead of 'half' everywhere. If you know what
+	// you're doing, you can change it to half in order to improve readability ^_^
 }
