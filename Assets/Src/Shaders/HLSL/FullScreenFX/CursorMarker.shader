@@ -18,7 +18,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/CursorMarker"
     Properties
     {
         _Color("Color", Color) = (1, 1, 1, 0)
-        _Radius("Radius", Range(0, 32)) = 1
+        _Radius("Radius", Range(-1, 1)) = 0.15
     }
 
     SubShader
