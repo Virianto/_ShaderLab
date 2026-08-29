@@ -16,10 +16,10 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVignette"
     
     Properties
     {
-        _VignetteIntensity("Vignette Intensity", Range(-1, 1)) = 8
+        _VignetteIntensity("Vignette Intensity", Range(-1, 1)) = 0.5
         
         [IntRange]
-        _VignetteRadius("Vignette Radius", Range(-127, 127)) = 8
+        _VignetteRadius("Vignette Radius", Range(-127, 127)) = 24
         
         // Definir un centro editable desde código para combinar con el cursor
     }
@@ -62,14 +62,14 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVignette"
                 min10float2 uv = IN.texcoord;
                 
                 //
-                min16float4 result = min16float4(0, 0, 0, 0);
+                min16float4 result = SAMPLE_TEXTURE2D(_BlitTexture, sampler_PointClamp, uv);
                 
-                float2 centeredUV = IN.texcoord - 0.5;
+                float2 centeredUV = uv - 0.5;
 
                 float vignette =
                 pow(
-                    length(_VignetteCenter) * _VignetteIntensity,
-                    _VignetteRadius
+                    length(centeredUV) * _VignetteIntensity,
+                    _VignetteRadius * 0.01
                     );
 
                 vignette = saturate(vignette);
