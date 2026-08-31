@@ -39,7 +39,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/VoronoiNoiseBG"
             HLSLPROGRAM
 
             #pragma vertex Vert
-            #pragma fragment Frag
+            #pragma fragment pixelShader
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blit.hlsl"
@@ -113,9 +113,9 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/VoronoiNoiseBG"
                 return float3(d1, edgeDistance, cellRandom);
             }
 
-            float4 Frag(Varyings input) : SV_Target
+            float4 pixelShader(Varyings IN) : SV_Target
             {
-                float2 uv = input.texcoord;
+                float2 uv = IN.texcoord;
 
                 float4 sceneColor = SAMPLE_TEXTURE2D_X(
                     _BlitTexture,

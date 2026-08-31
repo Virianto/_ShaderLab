@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b00045f12942b46c698459096c89274e, type: 3}
-  m_Name: FullScreenPassRendererFeature
+  m_Name: Simple Vignette
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.FullScreenPassRendererFeature
-  m_Active: 1
+  m_Active: 0
   injectionPoint: 600
   fetchColorBuffer: 1
   requirements: 0
@@ -37,6 +37,26 @@ MonoBehaviour:
   fetchColorBuffer: 0
   requirements: 0
   passMaterial: {fileID: 2100000, guid: ce0d4e2c2457fcb4680b777b4d402199, type: 2}
+  passIndex: 0
+  bindDepthStencilAttachment: 0
+  m_Version: 1
+--- !u!114 &-1379164331801536578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00045f12942b46c698459096c89274e, type: 3}
+  m_Name: Simple Voronoi
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.FullScreenPassRendererFeature
+  m_Active: 1
+  injectionPoint: 600
+  fetchColorBuffer: 1
+  requirements: 0
+  passMaterial: {fileID: 2100000, guid: aa3b8103cba9e8b4e819e3c30b623b45, type: 2}
   passIndex: 0
   bindDepthStencilAttachment: 0
   m_Version: 1
@@ -91,7 +111,8 @@ MonoBehaviour:
   - {fileID: 196725866338902391}
   - {fileID: -5785774280125714628}
   - {fileID: -7239479524791076991}
-  m_RendererFeatureMap: ad6b866f10d7b46c8beede243ab218f2d61752c44ed1a52e77e1421522e9ba023cef8352f2ccb4af81371d86ba33889b
+  - {fileID: -1379164331801536578}
+  m_RendererFeatureMap: ad6b866f10d7b46c8beede243ab218f2d61752c44ed1a52e77e1421522e9ba023cef8352f2ccb4af81371d86ba33889bbe9714ec5839dcec
   m_UseNativeRenderPass: 1
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   m_AssetVersion: 3
