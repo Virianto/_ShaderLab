@@ -16,10 +16,10 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVignette"
     
     Properties
     {
-        _VignetteIntensity("Vignette Intensity", Range(-1, 1)) = 0.5
+        _VignetteSize("Vignette Size", Range(-64, 64)) = 0.5
         
         [IntRange]
-        _VignetteRadius("Vignette Radius", Range(-127, 127)) = 24
+        _VignetteSoftness("Vignette Softness", Range(-127, 127)) = 24
         
         // Definir un centro editable desde código para combinar con el cursor
     }
@@ -49,9 +49,9 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVignette"
             
             // UNIFORMS: External parameters
             
-            min10float2 _VignetteCenter;
-            min16float _VignetteIntensity;
-            min16float _VignetteRadius;
+            min16float2 _VignetteCenter;
+            min16float _VignetteSize;
+            min16float _VignetteSoftness;
            
             min16float4 pixelShader(Varyings IN) : SV_Target
             {
@@ -61,26 +61,22 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVignette"
                 min10float aspect = _ScreenParams.x / _ScreenParams.y;
                 min10float2 uv = IN.texcoord;
                 
-                //
+                
                 min16float4 result = SAMPLE_TEXTURE2D(_BlitTexture, sampler_PointClamp, uv);
                 
-                float2 centeredUV = uv - 0.5;
+                min10float2 centeredUV = uv - 0.5;
 
+                // Specify centeredUV.x or centeredUV.y makes the effect look like cinema or
+                // split screen
+                
                 float vignette =
                 pow(
-                    length(centeredUV) * _VignetteIntensity,
-                    _VignetteRadius * 0.01
+                    length(centeredUV) * _VignetteSize,
+                    _VignetteSoftness
                     );
-
-                vignette = saturate(vignette);
 
                 result.rgb *= (1.0 - vignette);
                 return result;
-                
-                
-               // min16float4 color = SAMPLE_TEXTURE2D(_BlitTexture, sampler_PointClamp, uv);
-                
-                //return color;
             }
             
             ENDHLSL
