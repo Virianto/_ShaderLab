@@ -40,6 +40,12 @@
    <img src="GIFs/FullScreenFX_2.gif" alt="Color inversion and pixelation GIF" width="360" />
 </div>
 
+> **Screen Vignette**
+
+<div align="center">
+   <img src="GIFs/FullScreenFX_3.gif" alt="Vignetted Voronoi GIF" width="360" />
+</div>
+
 > **World space stencil linked to particle system**
 
 <div align="center">
