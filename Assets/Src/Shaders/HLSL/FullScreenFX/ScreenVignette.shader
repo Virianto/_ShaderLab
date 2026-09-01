@@ -16,6 +16,9 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVignette"
     
     Properties
     {
+        [KeywordEnum(Screen, Circle, Vertical, Horizontal)]
+        _VignetteMode("Vignette Mode", Float) = 0
+        
         _VignetteSize("Vignette Size", Range(-64, 64)) = 0.5
         
         [IntRange]
@@ -43,37 +46,57 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVignette"
 
             #pragma vertex Vert
 			#pragma fragment pixelShader
+            
+            // Custom pragma for different vignette modes. Names MUST match "_VIGNETTEMODE" + Enum name
+            #pragma shader_feature_local _VIGNETTEMODE_SCREEN _VIGNETTEMODE_CIRCLE _VIGNETTEMODE_VERTICAL _VIGNETTEMODE_HORIZONTAL
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blit.hlsl"
             
             // UNIFORMS: External parameters
             
-            min16float2 _VignetteCenter;
+            min16float _VignetteMode;
             min16float _VignetteSize;
             min16float _VignetteSoftness;
            
-            min16float4 pixelShader(Varyings IN) : SV_Target
-            {
-                _VignetteCenter = (0.5f, 0.5f);
+            // Custom function to manage vignette modes
+            min10float GetVignette(min10float2 uv)
+            {          
+                min10float vignette;
                 
+                #if defined(_VIGNETTEMODE_SCREEN)
+
+                    vignette = pow(length(uv) * _VignetteSize, _VignetteSoftness);
+
+                #elif defined(_VIGNETTEMODE_CIRCLE)
+
                 // This is possible thanks to the HLSL include
                 min10float aspect = _ScreenParams.x / _ScreenParams.y;
-                min10float2 uv = IN.texcoord;
-                
+                   
+                uv.x *= aspect;
+                vignette = pow(length(uv) * _VignetteSize, _VignetteSoftness);
+
+                #elif defined(_VIGNETTEMODE_VERTICAL)
+
+                   vignette = pow(length(uv.x) * _VignetteSize, _VignetteSoftness);
+
+                #elif defined(_VIGNETTEMODE_HORIZONTAL)
+
+                    vignette = pow(length(uv.y) * _VignetteSize, _VignetteSoftness);
+
+                #endif
+                return vignette;
+            }
+            
+            min16float4 pixelShader(Varyings IN) : SV_Target
+            {                
+                min10float2 uv = IN.texcoord;                
                 
                 min16float4 result = SAMPLE_TEXTURE2D(_BlitTexture, sampler_PointClamp, uv);
                 
                 min10float2 centeredUV = uv - 0.5;
 
-                // Specify centeredUV.x or centeredUV.y makes the effect look like cinema or
-                // split screen
-                
-                float vignette =
-                pow(
-                    length(centeredUV) * _VignetteSize,
-                    _VignetteSoftness
-                    );
+                min10float vignette = GetVignette(centeredUV);
 
                 result.rgb *= (1.0 - vignette);
                 return result;

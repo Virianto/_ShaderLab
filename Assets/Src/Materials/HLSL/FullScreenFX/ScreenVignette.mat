@@ -24,7 +24,8 @@ Material:
   m_Shader: {fileID: 4800000, guid: 697df358dc459984e81f8de6942172db, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _VIGNETTEMODE_CIRCLE
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -126,10 +127,11 @@ Material:
     - _SrcBlendAlpha: 1
     - _Surface: 0
     - _VignetteIntensity: -4.9
+    - _VignetteMode: 1
     - _VignetteRadiu: 8
     - _VignetteRadius: -27
-    - _VignetteSize: 15.4
-    - _VignetteSoftness: -114
+    - _VignetteSize: 5.2
+    - _VignetteSoftness: 2
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
