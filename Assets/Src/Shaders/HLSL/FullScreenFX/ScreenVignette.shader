@@ -19,7 +19,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVignette"
         [KeywordEnum(Screen, Circle, Vertical, Horizontal)]
         _VignetteMode("Vignette Mode", Float) = 0
         
-        _VignetteSize("Vignette Size", Range(-64, 64)) = 0.5
+        _VignetteSize("Vignette Size", Range(2, 64)) = 0.5
         
         [IntRange]
         _VignetteSoftness("Vignette Softness", Range(-128, 128)) = 24
