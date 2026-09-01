@@ -22,9 +22,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVignette"
         _VignetteSize("Vignette Size", Range(-64, 64)) = 0.5
         
         [IntRange]
-        _VignetteSoftness("Vignette Softness", Range(-127, 127)) = 24
-        
-        // Definir un centro editable desde código para combinar con el cursor
+        _VignetteSoftness("Vignette Softness", Range(-128, 128)) = 24
     }
 
     SubShader
@@ -70,21 +68,22 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVignette"
 
                 #elif defined(_VIGNETTEMODE_CIRCLE)
 
-                // This is possible thanks to the HLSL include
-                min10float aspect = _ScreenParams.x / _ScreenParams.y;
-                   
-                uv.x *= aspect;
-                vignette = pow(length(uv) * _VignetteSize, _VignetteSoftness);
+                    // This is possible thanks to the HLSL include
+                    min10float aspect = _ScreenParams.x / _ScreenParams.y;
+                       
+                    uv.x *= aspect;
+                    vignette = pow(length(uv) * _VignetteSize, _VignetteSoftness);
 
                 #elif defined(_VIGNETTEMODE_VERTICAL)
 
-                   vignette = pow(length(uv.x) * _VignetteSize, _VignetteSoftness);
+                    vignette = pow(length(uv.x) * _VignetteSize, _VignetteSoftness);
 
                 #elif defined(_VIGNETTEMODE_HORIZONTAL)
 
                     vignette = pow(length(uv.y) * _VignetteSize, _VignetteSoftness);
 
                 #endif
+                
                 return vignette;
             }
             
