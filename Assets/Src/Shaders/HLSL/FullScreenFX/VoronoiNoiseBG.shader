@@ -153,7 +153,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/VoronoiNoiseBG"
                 
                 float2 vResult;
                 
-                Unity_Voronoi_float(uv * _Scale, time, 10, vResult.x, vResult.y);
+                Unity_Voronoi_float(uv * _Scale, time, _Scale, vResult.x, vResult.y);
                 
                 float v = lerp(vResult.x, vResult.y, _Jitter);
                 float w = pow(v, 2.0);
