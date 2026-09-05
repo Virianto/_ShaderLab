@@ -52,6 +52,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVoronoi"
             #include "Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blit.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
+                            
                 min16float _Scale;
                 min16float _Speed;
                 min16float _Jitter;
@@ -59,9 +60,10 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVoronoi"
 
                 min16float4 _CellColorA;
                 min16float4 _CellColorB;
-               min16float4 _EdgeColor;
+                min16float4 _EdgeColor;
 
                 min16float _SceneBlend;
+            
             CBUFFER_END
 
             inline min16float2 unity_voronoi_noise_randomVector (float2 UV, float offset)
@@ -98,7 +100,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVoronoi"
             {
                 min16float2 uv = IN.texcoord;
 
-                min16float4 result = SAMPLE_TEXTURE2D_X(_BlitTexture, sampler_LinearClamp, uv);
+                min16float4 screenColor = SAMPLE_TEXTURE2D_X(_BlitTexture, sampler_LinearClamp, uv);
 
                 min16float time = _Time.y * _Speed;
                 
@@ -109,7 +111,9 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVoronoi"
                 min16float v = lerp(vResult.x, vResult.y, _Jitter);
                 min16float w = pow(v, 2.0);
                 
-                result *= w;
+                min16float4 result = screenColor * w;
+                
+                result = lerp(screenColor, result, _SceneBlend);
                 
                 return result;
             }
