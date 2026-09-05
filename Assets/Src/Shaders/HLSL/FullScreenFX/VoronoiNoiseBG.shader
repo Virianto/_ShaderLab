@@ -57,16 +57,46 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/VoronoiNoiseBG"
                 float _SceneBlend;
             CBUFFER_END
 
-            float2 Hash22(float2 p)
+            inline float2 unity_voronoi_noise_randomVector (float2 UV, float offset)
+            {
+                float2x2 m = float2x2(15.27, 47.63, 99.41, 89.98);
+                UV = frac(sin(mul(UV, m)) * 46839.32);
+                return float2(sin(UV.y*+offset)*0.5+0.5, cos(UV.x*offset)*0.5+0.5);
+            }
+
+            void Unity_Voronoi_float(float2 UV, float AngleOffset, float CellDensity, out float Out, out float Cells)
+            {
+                float2 g = floor(UV * CellDensity);
+                float2 f = frac(UV * CellDensity);
+                float3 res = float3(8.0, 0.0, 0.0);
+
+                for(int y=-1; y<=1; y++)
+                {
+                    for(int x=-1; x<=1; x++)
+                    {
+                        float2 lattice = float2(x,y);
+                        float2 offset = unity_voronoi_noise_randomVector(lattice + g, AngleOffset);
+                        float d = distance(lattice + offset, f);
+                        if(d < res.x)
+                        {
+                            res = float3(d, offset.x, offset.y);
+                            Out = res.x;
+                            Cells = res.y;
+                        }
+                    }
+                }
+            }
+            
+            /*float2 Hash22(float2 p)
             {
                 float2 q;
                 q.x = dot(p, float2(127.1, 311.7));
                 q.y = dot(p, float2(269.5, 183.3));
 
                 return frac(sin(q) * 43758.5453);
-            }
+            }*/
 
-            float3 Voronoi(float2 uv, float time)
+            /*float3 Voronoi(float2 uv, float time)
             {
                 float2 cell = floor(uv);
                 float2 local = frac(uv);
@@ -111,47 +141,38 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/VoronoiNoiseBG"
                 float edgeDistance = d2 - d1;
 
                 return float3(d1, edgeDistance, cellRandom);
-            }
+            }*/
 
             float4 pixelShader(Varyings IN) : SV_Target
             {
                 float2 uv = IN.texcoord;
 
-                float4 sceneColor = SAMPLE_TEXTURE2D_X(
-                    _BlitTexture,
-                    sampler_LinearClamp,
-                    uv
-                );
+                float4 result = SAMPLE_TEXTURE2D_X(_BlitTexture, sampler_LinearClamp, uv);
 
                 float time = _Time.y * _Speed;
+                
+                float2 vResult;
+                
+                Unity_Voronoi_float(uv * _Scale, time, 10, vResult.x, vResult.y);
+                
+                float v = lerp(vResult.x, vResult.y, _Jitter);
+                float w = pow(v, 2.0);
 
-                float3 v = Voronoi(uv * _Scale, time);
+                //float3 v = Voronoi(uv * _Scale, time);
 
-                float edge = 1.0 - smoothstep(
-                    _LineWidth,
-                    _LineWidth * 2.0,
-                    v.y
-                );
+                //float edge = 1.0 - smoothstep(_LineWidth, _LineWidth * 2.0, v.y);
 
-                float3 cellColor = lerp(
-                    _CellColorA.rgb,
-                    _CellColorB.rgb,
-                    v.z
-                );
+                //float3 cellColor = lerp(_CellColorA.rgb, _CellColorB.rgb, v.z);
 
-                float3 voronoiColor = lerp(
-                    cellColor,
-                    _EdgeColor.rgb,
-                    edge
-                );
+                //float3 voronoiColor = lerp(cellColor, _EdgeColor.rgb, edge);
 
-                float3 finalColor = lerp(
-                    voronoiColor,
-                    sceneColor.rgb * voronoiColor,
-                    _SceneBlend
-                );
+                //float3 finalColor = lerp(voronoiColor, sceneColor.rgb * voronoiColor, _SceneBlend);
 
-                return float4(finalColor, 1.0);
+                //return float4(finalColor, 1.0);
+                
+                result *= w;
+                
+                return result;
             }
 
             ENDHLSL
