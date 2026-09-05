@@ -113,7 +113,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Jitter: 1
+    - _Jitter: 0
     - _LineWidth: 0.032
     - _Metallic: 0
     - _OcclusionStrength: 1
@@ -121,12 +121,12 @@ Material:
     - _PixelSize: 128
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Scale: 4.16
+    - _Scale: 2
     - _SceneBlend: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: -2.3
+    - _Speed: 2
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0

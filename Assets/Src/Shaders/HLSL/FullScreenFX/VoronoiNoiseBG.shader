@@ -16,9 +16,16 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/VoronoiNoiseBG"
     
     Properties
     {
-        _Scale ("Scale", Float) = 12
-        _Speed ("Speed", Float) = 1
-        _Jitter ("Jitter", Range(0, 1)) = 0.8
+        [IntRange]
+        _Scale ("Scale", Range(-16, 16)) = 4
+        
+        [IntRange]
+        _Speed ("Speed", Range(-2, 2)) = 1
+        
+        [IntRange]
+        _Jitter ("Jitter", Range(-3, 3)) = 1
+        
+        
         _LineWidth ("Line Width", Range(0.001, 0.2)) = 0.03
 
         _CellColorA ("Cell Color A", Color) = (0.05, 0.08, 0.12, 1)
