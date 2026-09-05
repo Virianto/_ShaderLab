@@ -23,7 +23,7 @@ public class ParticleSystemToShader : MonoBehaviour
         myMaterial.SetFloat("_ParticlesCount", _particles.Length);
     }
 
-    private void Update()
+    void Update()
     {
         List<Vector4> newParticlesPositionList = new List<Vector4>();
         
