@@ -38,7 +38,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVignette"
 
         Pass
         {
-            Name "FullScreenPass"
+            Name "FullScreenVignette"
             
             HLSLPROGRAM
 

@@ -28,20 +28,25 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVoronoi"
         
         _LineWidth ("Line Width", Range(0.001, 0.2)) = 0.03
 
-        _CellColorA ("Cell Color A", Color) = (0.05, 0.08, 0.12, 1)
-        _CellColorB ("Cell Color B", Color) = (0.2, 0.6, 1.0, 1)
-        _EdgeColor ("Edge Color", Color) = (1.0, 0.9, 0.25, 1)
+        _CellsColor ("Cells Color", Color) = (0.05, 0.08, 0.12, 1)
 
         _SceneBlend ("Scene Blend", Range(0, 1)) = 0
     }
 
     SubShader
     {
-        Tags { "RenderPipeline" = "UniversalPipeline" }
+        Tags
+        {
+            "RenderPipeline" = "UniversalPipeline"
+            "RenderType" = "Transparent"
+        }
+        
+        ZWrite Off
+        Cull Off
 
         Pass
         {
-            Name "Moving Voronoi Fullscreen"
+            Name "FullScreenVoronoi"
 
             HLSLPROGRAM
 
@@ -58,22 +63,20 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVoronoi"
                 min16float _Jitter;
                 min16float _LineWidth;
 
-                min16float4 _CellColorA;
-                min16float4 _CellColorB;
-                min16float4 _EdgeColor;
+                min16float4 _CellsColor;
 
                 min16float _SceneBlend;
             
             CBUFFER_END
 
-            inline min16float2 unity_voronoi_noise_randomVector (float2 UV, float offset)
+            inline min16float2 VoronoiRandomVector (min16float2 UV, min16float offset)
             {
                 min16float2x2 m = min16float2x2(15.27, 47.63, 99.41, 89.98);
                 UV = frac(sin(mul(UV, m)) * 46839.32);
                 return min16float2(sin(UV.y*+offset)*0.5+0.5, cos(UV.x*offset)*0.5+0.5);
             }
 
-            void Unity_Voronoi_float(min16float2 UV, min16float AngleOffset, min16float CellDensity, out min16float Out, out min16float Cells)
+            void VoronoiEffect(min16float2 UV, min16float AngleOffset, min16float CellDensity, out min16float Out, out min16float Cells)
             {
                min16float2 g = floor(UV * CellDensity);
                min16float2 f = frac(UV * CellDensity);
@@ -84,7 +87,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVoronoi"
                     for(int x=-1; x<=1; x++)
                     {
                         min16float2 lattice = min16float2(x,y);
-                        min16float2 offset = unity_voronoi_noise_randomVector(lattice + g, AngleOffset);
+                        min16float2 offset = VoronoiRandomVector(lattice + g, AngleOffset);
                         min16float d = distance(lattice + offset, f);
                         if(d < res.x)
                         {
@@ -106,12 +109,12 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVoronoi"
                 
                 min16float2 vResult;
                 
-                Unity_Voronoi_float(uv * _Scale, time, _Scale, vResult.x, vResult.y);
+                VoronoiEffect(uv * _Scale, time, _Scale, vResult.x, vResult.y);
                 
                 min16float v = lerp(vResult.x, vResult.y, _Jitter);
                 min16float w = pow(v, 2.0);
                 
-                min16float4 result = screenColor * w;
+                min16float4 result = _CellsColor * screenColor * w;
                 
                 result = lerp(screenColor, result, _SceneBlend);
                 
@@ -121,4 +124,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVoronoi"
             ENDHLSL
         }
     }
+    // DISCLAIMER: I don't trust anybody's using Shader Precision Model - UNIFIED.
+	// That's why I'm using 'min16float' instead of 'half' everywhere. If you know what
+	// you're doing, you can change it to half in order to improve readability ^_^
 }
