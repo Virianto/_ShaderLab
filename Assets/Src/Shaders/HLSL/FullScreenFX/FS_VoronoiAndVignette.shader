@@ -168,6 +168,10 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/FS_VoronoiAndVignette"
                 min16float edgeStrength = lerp(voronoiResult.x, voronoiResult.y, _Jitter);
                 min16float attenuation = pow(edgeStrength, _AttenuationPower);
                 
+                min10float2 mix = voronoiResult * vignette;
+                
+                mix *= attenuation;
+                
                 min16float4 result = _CellsColor * screenColor * attenuation;
                 
                 result.rgb *= (1.0 - vignette);
