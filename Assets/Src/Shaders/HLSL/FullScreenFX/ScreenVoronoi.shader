@@ -25,8 +25,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVoronoi"
         [IntRange]
         _Jitter ("Jitter", Range(-3, 3)) = 1
         
-        
-        _LineWidth ("Line Width", Range(0.001, 0.2)) = 0.03
+        _AttenuationPower ("Attenuation Power", Range(0.001, 3)) = 0.1
 
         _CellsColor ("Cells Color", Color) = (0.05, 0.08, 0.12, 1)
 
@@ -61,7 +60,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVoronoi"
                 min16float _Scale;
                 min16float _Speed;
                 min16float _Jitter;
-                min16float _LineWidth;
+                min16float _AttenuationPower;
 
                 min16float4 _CellsColor;
 
@@ -71,8 +70,8 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVoronoi"
 
             inline min16float2 VoronoiRandomVector (float2 UV, float offset)
             {
-                min16float2x2 m = min16float2x2(15.27, 47.63, 99.41, 89.98);
-                UV = frac(sin(mul(UV, m)) * 46839.32);
+                min16float2x2 m = min16float2x2(13, 43, 81, 72);
+                UV = frac(sin(mul(UV, m)) * 6699);
                 return min16float2(sin(UV.y*+offset)*0.5+0.5, cos(UV.x*offset)*0.5+0.5);
             }
 
@@ -80,7 +79,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVoronoi"
             {
                min16float2 g = floor(UV * CellDensity);
                min16float2 f = frac(UV * CellDensity);
-               min16float3 res = min16float3(8.0, 0.0, 0.0);
+               min16float3 res = min16float3(9, 0, 0);
 
                 for(int y=-1; y<=1; y++)
                 {
@@ -107,14 +106,14 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVoronoi"
 
                 min16float time = _Time.y * _Speed;
                 
-                min16float2 vResult;
+                min16float2 voronoiResult;
                 
-                VoronoiEffect(uv * _Scale, time, _Scale, vResult.x, vResult.y);
+                VoronoiEffect(uv * _Scale, time, _Scale, voronoiResult.x, voronoiResult.y);
                 
-                min16float v = lerp(vResult.x, vResult.y, _Jitter);
-                min16float w = pow(v, 2.0);
+                min16float edgeStrength = lerp(voronoiResult.x, voronoiResult.y, _Jitter);
+                min16float attenuation = pow(edgeStrength, _AttenuationPower);
                 
-                min16float4 result = _CellsColor * screenColor * w;
+                min16float4 result = _CellsColor * screenColor * attenuation;
                 
                 result = lerp(screenColor, result, _SceneBlend);
                 
