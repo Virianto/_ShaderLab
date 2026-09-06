@@ -69,7 +69,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/ScreenVoronoi"
             
             CBUFFER_END
 
-            inline min16float2 VoronoiRandomVector (min16float2 UV, min16float offset)
+            inline min16float2 VoronoiRandomVector (float2 UV, float offset)
             {
                 min16float2x2 m = min16float2x2(15.27, 47.63, 99.41, 89.98);
                 UV = frac(sin(mul(UV, m)) * 46839.32);
