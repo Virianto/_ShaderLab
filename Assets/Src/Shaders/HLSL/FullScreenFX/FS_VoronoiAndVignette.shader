@@ -26,7 +26,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/FS_VoronoiAndVignette"
         _VignetteSize("Vignette Size", Range(2, 64)) = 0.5
         
         [IntRange]
-        _VignetteSoftness("Vignette Softness", Range(-128, 128)) = 24
+        _VignetteHardness("Vignette Softness", Range(-128, 128)) = 24
         
         [Header(Voronoi)]
         
@@ -76,7 +76,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/FS_VoronoiAndVignette"
                        
                 min16float _VignetteMode;
                 min16float _VignetteSize;
-                min16float _VignetteSoftness;
+                min16float _VignetteHardness;
             
                 min16float _Scale;
                 min16float _Speed;
@@ -96,7 +96,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/FS_VoronoiAndVignette"
                 
                 #if defined(_VIGNETTEMODE_SCREEN)
 
-                    vignette = pow(length(uv) * _VignetteSize, _VignetteSoftness);
+                    vignette = pow(length(uv) * _VignetteSize, _VignetteHardness);
 
                 #elif defined(_VIGNETTEMODE_CIRCLE)
 
@@ -104,15 +104,15 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/FS_VoronoiAndVignette"
                     min10float aspect = _ScreenParams.x / _ScreenParams.y;
                        
                     uv.x *= aspect;
-                    vignette = pow(length(uv) * _VignetteSize, _VignetteSoftness);
+                    vignette = pow(length(uv) * _VignetteSize, _VignetteHardness);
 
                 #elif defined(_VIGNETTEMODE_VERTICAL)
 
-                    vignette = pow(length(uv.x) * _VignetteSize, _VignetteSoftness);
+                    vignette = pow(length(uv.x) * _VignetteSize, _VignetteHardness);
 
                 #elif defined(_VIGNETTEMODE_HORIZONTAL)
 
-                    vignette = pow(length(uv.y) * _VignetteSize, _VignetteSoftness);
+                    vignette = pow(length(uv.y) * _VignetteSize, _VignetteHardness);
 
                 #endif
                 
