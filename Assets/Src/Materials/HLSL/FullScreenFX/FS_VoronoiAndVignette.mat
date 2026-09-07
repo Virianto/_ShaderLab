@@ -103,7 +103,8 @@ Material:
     - _Blend: 0
     - _BlendDst: 1
     - _BlendModePreserveSpecular: 1
-    - _BlendSrc: 3
+    - _BlendOp: 22
+    - _BlendSrc: 1
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0

@@ -25,6 +25,9 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/FS_VoronoiAndVignette"
         [Enum(UnityEngine.Rendering.BlendMode)]
         _BlendDst("Blending DST", Int) = 0
         
+        [Enum(UnityEngine.Rendering.BlendOp)]
+        _BlendOp("Blending OP", Int) = 0
+        
         [Header(Vignetting)]
         
         [KeywordEnum(Screen, Circle, Vertical, Horizontal)]
@@ -63,6 +66,8 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/FS_VoronoiAndVignette"
 
         // Custom way of controlling BlendMode from Unity Editor
         Blend [_BlendSrc] [_BlendDst]
+        BlendOp [_BlendOp]
+        
         ZWrite Off
         Cull Off
 
