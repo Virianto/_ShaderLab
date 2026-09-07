@@ -141,9 +141,9 @@ Material:
     - _SrcBlend: 5
     - _SrcBlendAlpha: 1
     - _Surface: 1
-    - _VignetteIntensity: 1
+    - _VignetteIntensity: 0.374
     - _VignetteRadius: -9.26
-    - _VoronoiMode: 0
+    - _VoronoiMode: 1
     - _VoronoiPower: 10
     - _VoronoiScale: 12.3
     - _VoronoiSpeed: 2

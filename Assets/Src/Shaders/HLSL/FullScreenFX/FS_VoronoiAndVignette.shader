@@ -18,6 +18,13 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/FS_VoronoiAndVignette"
     {
         [Header(GENERAL)]
         
+        // More info on blend modes: https://docs.unity3d.com/ScriptReference/Rendering.BlendMode.html        
+        [Enum(UnityEngine.Rendering.BlendMode)]
+        _BlendSrc("Blending SRC", Int) = 0
+        
+        [Enum(UnityEngine.Rendering.BlendMode)]
+        _BlendDst("Blending DST", Int) = 0
+        
         [Header(Vignetting)]
         
         [KeywordEnum(Screen, Circle, Vertical, Horizontal)]
@@ -26,7 +33,7 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/FS_VoronoiAndVignette"
         _VignetteSize("Vignette Size", Range(2, 64)) = 0.5
         
         [IntRange]
-        _VignetteHardness("Vignette Softness", Range(-128, 128)) = 24
+        _VignetteHardness("Vignette Hardness", Range(-128, 128)) = 24
         
         [Header(Voronoi)]
         
@@ -53,7 +60,9 @@ Shader "_ViriantoTem/HLSL/FullScreenFX/FS_VoronoiAndVignette"
             "RenderPipeline" = "UniversalPipeline"
             "RenderType" = "Transparent"
         }
-        
+
+        // Custom way of controlling BlendMode from Unity Editor
+        Blend [_BlendSrc] [_BlendDst]
         ZWrite Off
         Cull Off
 
